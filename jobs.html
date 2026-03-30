@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#393057",
+              "inverse-primary": "#7cbbfc",
+              "surface": "#f7f9fb",
+              "inverse-surface": "#0b0f10",
+              "secondary-fixed": "#cde5fc",
+              "primary": "#11639e",
+              "error": "#a83836",
+              "on-background": "#2c3437",
+              "on-primary-container": "#00375d",
+              "on-tertiary-container": "#4c436c",
+              "background": "#f7f9fb",
+              "primary-fixed-dim": "#6eaded",
+              "tertiary": "#635983",
+              "primary-fixed": "#7cbbfc",
+              "secondary-dim": "#3f5668",
+              "on-tertiary-fixed-variant": "#564c76",
+              "outline-variant": "#acb3b7",
+              "on-primary-fixed-variant": "#00406b",
+              "outline": "#747c80",
+              "secondary-fixed-dim": "#bfd7ed",
+              "surface-container-low": "#f0f4f7",
+              "primary-dim": "#00568e",
+              "surface-container": "#eaeff2",
+              "secondary-container": "#cde5fc",
+              "on-error-container": "#6e0a12",
+              "on-secondary-fixed-variant": "#475e70",
+              "surface-dim": "#d4dbdf",
+              "tertiary-fixed-dim": "#ccc0f0",
+              "tertiary-dim": "#574d76",
+              "tertiary-container": "#dacdff",
+              "on-primary-fixed": "#001f38",
+              "on-secondary": "#f5f9ff",
+              "surface-variant": "#dce4e8",
+              "secondary": "#4b6274",
+              "primary-container": "#7cbbfc",
+              "on-surface": "#2c3437",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#f7f9ff",
+              "on-surface-variant": "#596064",
+              "on-tertiary": "#fdf7ff",
+              "on-error": "#fff7f6",
+              "tertiary-fixed": "#dacdff",
+              "surface-container-highest": "#dce4e8",
+              "on-secondary-fixed": "#2b4253",
+              "error-container": "#fa746f",
+              "surface-bright": "#f7f9fb",
+              "surface-container-high": "#e3e9ed",
+              "error-dim": "#67040d",
+              "surface-tint": "#11639e",
+              "on-secondary-container": "#3d5466",
+              "inverse-on-surface": "#9a9d9f"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .tonal-transition {
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header Navigation -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none h-20">
+<div class="flex justify-between items-center px-8 h-full max-w-7xl mx-auto">
+<div class="text-2xl font-black text-slate-800 dark:text-slate-100 font-headline">MyRemo (マイリモ)</div>
+<nav class="hidden md:flex items-center gap-8 font-manrope text-base font-medium">
+<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 transition-colors" href="jobs.html">求人一覧</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="index.html">マイリモとは</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="faq.html">FAQ/流れ</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="column-case.html">コラム</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors" href="column-case.html">事例</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:block px-5 py-2 text-sm font-bold text-blue-700 hover:bg-blue-50 transition-all rounded-xl">LINE相談</button>
+<a href="jobs.html" class="px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-xl scale-95 active:opacity-80 transition-all shadow-md inline-block">求人を見る</a>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+<!-- Hero Title Section -->
+<div class="mb-16">
+<h1 class="text-4xl md:text-5xl font-extrabold font-headline text-on-surface tracking-tight mb-4">
+                お仕事一覧
+            </h1>
+<p class="text-lg text-on-surface-variant font-medium">
+                条件にぴったりの在宅ワークを見つけましょう。
+            </p>
+</div>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-72 flex-shrink-0">
+<div class="bg-surface-container p-8 rounded-xl sticky top-28">
+<div class="flex items-center gap-2 mb-8 text-primary font-bold">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-headline uppercase tracking-wider text-sm">Filters</span>
+</div>
+<form class="space-y-8">
+<!-- Job Type -->
+<div class="space-y-4">
+<label class="block text-sm font-bold text-on-surface">職種</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg text-sm px-4 py-3 focus:ring-2 focus:ring-primary/20">
+<option>すべて</option>
+<option>カスタマーサポート</option>
+<option>事務・アシスタント</option>
+<option>エンジニア</option>
+<option>マーケティング</option>
+</select>
+</div>
+<!-- Industry -->
+<div class="space-y-4">
+<label class="block text-sm font-bold text-on-surface">業界</label>
+<div class="grid grid-cols-1 gap-2">
+<label class="flex items-center gap-3 text-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+                                    IT・テクノロジー
+                                </label>
+<label class="flex items-center gap-3 text-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+                                    教育・スクール
+                                </label>
+<label class="flex items-center gap-3 text-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+                                    不動産・建設
+                                </label>
+</div>
+</div>
+<!-- Work Style -->
+<div class="space-y-4">
+<label class="block text-sm font-bold text-on-surface">働き方</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg text-sm px-4 py-3 focus:ring-2 focus:ring-primary/20">
+<option>フルリモート</option>
+<option>一部出社あり</option>
+<option>業務委託</option>
+</select>
+</div>
+<!-- Time / Experience -->
+<div class="space-y-6 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-on-surface">未経験可</span>
+<input class="w-10 h-5 bg-outline-variant rounded-full appearance-none checked:bg-primary relative transition-all cursor-pointer before:content-[''] before:absolute before:w-4 before:h-4 before:bg-white before:rounded-full before:top-0.5 before:left-0.5 checked:before:left-5 before:transition-all" type="checkbox"/>
+</div>
+</div>
+<button class="w-full py-3 bg-secondary text-on-secondary font-bold rounded-xl hover:opacity-90 transition-all text-sm" type="submit">
+                            条件をクリア
+                        </button>
+</form>
+</div>
+</aside>
+<!-- Job Listings -->
+<div class="flex-grow space-y-6">
+<!-- Result Stats -->
+<div class="flex items-center justify-between mb-8 px-2">
+<span class="text-on-surface-variant font-medium">該当件数: <strong class="text-primary text-xl">128</strong> 件</span>
+<div class="flex items-center gap-2 text-sm font-bold text-secondary">
+<span>新着順</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</div>
+</div>
+<!-- Job Card 1 -->
+<div class="group bg-surface-container-lowest p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-32 h-32 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-tech minimalist laptop setup in a bright airy home office with soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX3VNK6oXC0T6pGvZLr-vRdRfbJBCFWc1MZCkYHX84-NwbFit9mnURpUPdWfUfxAPHpa9cgLE_A0glndEnxz4pkjAuGEzQHmEJc60LOWPjiY7uSwOPefDe3Fw57SAVpGO_9rfrNTAJyMk6o0-9zGMMtQX6nq1HjDqsoIYjqylERwOkRpk8ErFNlbNWiz87PaMBTwq3XvsomneBqMWFbKJfq6YX0pObvJiFt1DV2y0pe3Nmlbkg97Bx66QJnXWHGzoL0aQ0nzgWLI4"/>
+</div>
+<div class="flex-grow space-y-4">
+<div class="flex flex-wrap items-center gap-3">
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-xs font-bold rounded-full">新着</span>
+<span class="text-sm font-bold text-primary">IT・SaaS / カスタマーサクセス</span>
+</div>
+<h2 class="text-2xl font-bold font-headline text-on-surface leading-tight">
+                                大手SaaS企業のカスタマーサポート（完全在宅）
+                            </h2>
+<p class="text-on-surface-variant text-sm line-clamp-2">
+                                ユーザーからのお問い合わせ対応や導入支援をお任せします。マニュアル完備で未経験の方でも安心してスタートできる環境です。
+                            </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Hourly Rate</span>
+<p class="text-sm font-bold text-on-surface">¥1,800 〜 ¥2,200</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Work Style</span>
+<p class="text-sm font-bold text-on-surface">フルリモート</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Start Date</span>
+<p class="text-sm font-bold text-on-surface">即日〜応相談</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Min. Hours</span>
+<p class="text-sm font-bold text-on-surface">週15時間〜</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-between items-end gap-4 min-w-[140px]">
+<div class="text-right">
+<span class="inline-block px-4 py-1.5 bg-primary/5 text-primary text-xs font-bold rounded-lg mb-2">PC貸与あり</span>
+</div>
+<a href="recruit.html" class="w-full py-3 px-6 bg-surface-container-high text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all inline-block text-center">
+                                詳細を見る
+                            </a>
+</div>
+</div>
+</div>
+<!-- Job Card 2 -->
+<div class="group bg-surface-container-lowest p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-32 h-32 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Graphic designer working on a tablet with colorful digital art visible in a cozy modern studio space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDLRNPUomTM89TSJFETj9D__CFVBJng9wy0HIj_xiyPAtTnkGZ_WVDvfuAGkJNChmfDGbRHQihgHAactgmsNb3GDKEW8xYfQKFfAujP5yW8oLaBVyTchKPwQM4WjDr0ulaQfRwdaAGUWTwDI866zELOiW6_AOrje8Lk6MJlTU9eoWLEZAXgdM30tRZdJPBQItW8jf_EWasVdJ6YuV_jK3cx1wBHjFY91VQtGu6n77Z1B4_08UQ6mc-Ctcnjz-Qpx1TBR8JCu_KMec"/>
+</div>
+<div class="flex-grow space-y-4">
+<div class="flex flex-wrap items-center gap-3">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-xs font-bold rounded-full">未経験可</span>
+<span class="text-sm font-bold text-primary">教育・EdTech / オンライン事務</span>
+</div>
+<h2 class="text-2xl font-bold font-headline text-on-surface leading-tight">
+                                オンラインスクールの運営事務・受講生管理
+                            </h2>
+<p class="text-on-surface-variant text-sm line-clamp-2">
+                                急成長中のオンラインスクールにて、受講生の進捗管理や簡単な書類作成をサポートいただきます。
+                            </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Hourly Rate</span>
+<p class="text-sm font-bold text-on-surface">¥1,500 〜</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Work Style</span>
+<p class="text-sm font-bold text-on-surface">フルリモート</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Start Date</span>
+<p class="text-sm font-bold text-on-surface">来月〜</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Min. Hours</span>
+<p class="text-sm font-bold text-on-surface">週20時間〜</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-between items-end gap-4 min-w-[140px]">
+<div class="text-right">
+<span class="inline-block px-4 py-1.5 bg-primary/5 text-primary text-xs font-bold rounded-lg mb-2">副業OK</span>
+</div>
+<a href="recruit.html" class="w-full py-3 px-6 bg-surface-container-high text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all inline-block text-center">
+                                詳細を見る
+                            </a>
+</div>
+</div>
+</div>
+<!-- Job Card 3 -->
+<div class="group bg-surface-container-lowest p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-32 h-32 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean top-down view of a professional desk with a notebook, pen, and a cup of green tea on light wood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1EPke6cu-QIDLK_GVQX4lSK8tvYvCJ79PrlKyswc4Jp1iPL-fR2C_UxVsZyZHvQbRrjfke7tmeoUicPOrXdK4zWYjHo8Z_LwCYj3XUnVtyT2zEmRhBmAUTUPUzL8ZwUL14vmaMDa8Wu2Ng-lVPQeDmzWWmp3SWo67UBbU5owuispjVHFgyaAdbZ2dxYQis0b2za875cgDGUfSOT0HYY6dTvzw15E0HI0i-96RR_36NRkyn4GMkCgvFHd1dIe9JsU2SkMoAtp8Z3k"/>
+</div>
+<div class="flex-grow space-y-4">
+<div class="flex flex-wrap items-center gap-3">
+<span class="text-sm font-bold text-primary">Web制作 / ライティング・編集</span>
+</div>
+<h2 class="text-2xl font-bold font-headline text-on-surface leading-tight">
+                                自社メディアの記事執筆・ディレクション業務
+                            </h2>
+<p class="text-on-surface-variant text-sm line-clamp-2">
+                                暮らしと働き方をテーマにした自社メディアの記事執筆から、外部ライターへの指示出しなどの進行管理をお願いします。
+                            </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Hourly Rate</span>
+<p class="text-sm font-bold text-on-surface">¥1,600 〜 ¥2,500</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Work Style</span>
+<p class="text-sm font-bold text-on-surface">一部出社相談</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Start Date</span>
+<p class="text-sm font-bold text-on-surface">即日〜</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Min. Hours</span>
+<p class="text-sm font-bold text-on-surface">週24時間〜</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-between items-end gap-4 min-w-[140px]">
+<div class="text-right">
+<span class="inline-block px-4 py-1.5 bg-primary/5 text-primary text-xs font-bold rounded-lg mb-2">残業ほぼなし</span>
+</div>
+<a href="recruit.html" class="w-full py-3 px-6 bg-surface-container-high text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all inline-block text-center">
+                                詳細を見る
+                            </a>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 pt-12">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface-variant font-medium hover:text-primary transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface-variant font-medium hover:text-primary transition-all">3</button>
+<span class="px-2 text-on-surface-variant">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface-variant font-medium hover:text-primary transition-all">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-16 pb-8 bg-slate-50 dark:bg-slate-950 font-plus-jakarta text-sm">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 max-w-7xl mx-auto">
+<div class="space-y-4">
+<div class="text-xl font-bold text-slate-800 dark:text-slate-200">MyRemo (マイリモ)</div>
+<p class="text-slate-500 text-xs leading-relaxed">
+                    リモートワークで、新しい自由な働き方を。あなたのライフスタイルに合わせたお仕事探しをサポートします。
+                </p>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-slate-800 dark:text-slate-200">サービス</h4>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="jobs.html">求人一覧</a></li>
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="index.html">マイリモとは</a></li>
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="column-case.html">コラム</a></li>
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="column-case.html">事例</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-slate-800 dark:text-slate-200">サポート</h4>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="faq.html">FAQ/流れ</a></li>
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="#">お問い合わせ</a></li>
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="#">利用規約</a></li>
+<li><a class="hover:underline decoration-blue-500 underline-offset-4 transition-opacity" href="#">プライバシーポリシー</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold mb-6 text-slate-800 dark:text-slate-200">SNS</h4>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-600 group-hover:text-white">chat</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-primary transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-slate-600 group-hover:text-white">language</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center text-slate-400 text-xs">
+            © 2024 MyRemo. All rights reserved.
+        </div>
+</footer>
+<!-- FAB (Suppressed based on context: Focus is the job list, but for dashboard-like exploration it can be shown. Here suppressed as it's a details/list focus page) -->
+</body></html>

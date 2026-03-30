@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MyRemo (マイリモ) | 在宅ワークを、ちゃんと選べる入口へ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#393057",
+              "inverse-primary": "#7cbbfc",
+              "surface": "#f7f9fb",
+              "inverse-surface": "#0b0f10",
+              "secondary-fixed": "#cde5fc",
+              "primary": "#11639e",
+              "error": "#a83836",
+              "on-background": "#2c3437",
+              "on-primary-container": "#00375d",
+              "on-tertiary-container": "#4c436c",
+              "background": "#f7f9fb",
+              "primary-fixed-dim": "#6eaded",
+              "tertiary": "#635983",
+              "primary-fixed": "#7cbbfc",
+              "secondary-dim": "#3f5668",
+              "on-tertiary-fixed-variant": "#564c76",
+              "outline-variant": "#acb3b7",
+              "on-primary-fixed-variant": "#00406b",
+              "outline": "#747c80",
+              "secondary-fixed-dim": "#bfd7ed",
+              "surface-container-low": "#f0f4f7",
+              "primary-dim": "#00568e",
+              "surface-container": "#eaeff2",
+              "secondary-container": "#cde5fc",
+              "on-error-container": "#6e0a12",
+              "on-secondary-fixed-variant": "#475e70",
+              "surface-dim": "#d4dbdf",
+              "tertiary-fixed-dim": "#ccc0f0",
+              "tertiary-dim": "#574d76",
+              "tertiary-container": "#dacdff",
+              "on-primary-fixed": "#001f38",
+              "on-secondary": "#f5f9ff",
+              "surface-variant": "#dce4e8",
+              "secondary": "#4b6274",
+              "primary-container": "#7cbbfc",
+              "on-surface": "#2c3437",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#f7f9ff",
+              "on-surface-variant": "#596064",
+              "on-tertiary": "#fdf7ff",
+              "on-error": "#fff7f6",
+              "tertiary-fixed": "#dacdff",
+              "surface-container-highest": "#dce4e8",
+              "on-secondary-fixed": "#2b4253",
+              "error-container": "#fa746f",
+              "surface-bright": "#f7f9fb",
+              "surface-container-high": "#e3e9ed",
+              "error-dim": "#67040d",
+              "surface-tint": "#11639e",
+              "on-secondary-container": "#3d5466",
+              "inverse-on-surface": "#9a9d9f"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+      }
+      .tonal-transition {
+        transition: background-color 0.3s ease;
+      }
+      .gradient-primary {
+        background: linear-gradient(135deg, #11639e 0%, #7cbbfc 100%);
+      }
+      .match-meter-arc {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 25;
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
+<div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-slate-800 font-headline">MyRemo (マイリモ)</div>
+<div class="hidden md:flex items-center space-x-8 font-manrope text-base font-medium">
+<a class="text-blue-700 font-bold border-b-2 border-blue-700 transition-colors" href="jobs.html">求人一覧</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors" href="index.html">マイリモとは</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors" href="faq.html">FAQ/流れ</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors" href="column-case.html">コラム</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors" href="column-case.html">事例</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="hidden lg:block px-6 py-2.5 rounded-xl font-bold text-primary bg-surface-container-high scale-95 active:opacity-80 transition-all">LINE相談</button>
+<a href="jobs.html" class="px-6 py-2.5 rounded-xl font-bold text-on-primary gradient-primary scale-95 active:opacity-80 transition-all shadow-md inline-block">求人を見る</a>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-surface">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="z-10">
+<span class="inline-block px-4 py-1.5 rounded-full bg-primary-container text-on-primary-container text-sm font-bold mb-6">
+                    安心できる在宅ワークを
+                </span>
+<h1 class="font-headline font-extrabold text-4xl md:text-6xl text-on-surface leading-tight tracking-tight mb-8">
+                    在宅ワークを、<br/>
+<span class="text-primary">ちゃんと選べる</span>入口へ
+                </h1>
+<p class="text-lg md:text-xl text-secondary mb-10 leading-relaxed max-w-lg">
+                    自分に合った仕事を見つけやすく。相談しやすく。安心して応募しやすく。MyRemoは、あなたの理想の働き方を形にします。
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="jobs.html" class="px-8 py-4 rounded-xl font-bold text-white gradient-primary text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2 group inline-block">
+                        求人を見る
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<button class="px-8 py-4 rounded-xl font-bold text-primary bg-surface-container-high text-lg flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+                        LINEで相談する
+                    </button>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -top-20 -right-20 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl"></div>
+<div class="relative rounded-2xl overflow-hidden shadow-2xl">
+<img alt="Remote work setup" class="w-full h-[500px] object-cover" data-alt="Modern clean home office desk with a laptop, notebook, and a small plant, bathed in soft morning sunlight through a window." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp00haDlNWPDMGOjVosXWwkj5E2AAMK4365S5G4NIjW9NVE8OfCbWZ5Ubkx-esgs0IMxyvk6Wvpx1_7ldQ4scDJIiUOOwA5ZkPRg8LZL_Z8V3cQ_9BXoDYOyubCFXgkOGeVOGpo8D1LOKngllMvY7vKn1BGomc1zm65nwIBrvBdeytO8f_ldznR49e32yJtMyJ25fG2kyRp5-_bkDCowqDIU2C6j7N64WAOgLbPQwvqGk_IBNroivSkrDGKpd-n-r_QLqFt67tl6w"/>
+<div class="absolute bottom-6 left-6 right-6 bg-white/80 backdrop-blur-md p-6 rounded-xl border border-white/20 shadow-lg">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">掲載企業はすべて審査済み</p>
+<p class="text-xs text-secondary">安心してキャリアを選択できる環境を整えています</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Pain Points Section -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="font-headline text-3xl font-extrabold text-on-surface mb-4">こんな不安はありませんか？</h2>
+<div class="w-20 h-1 bg-primary/20 mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+<div class="w-14 h-14 rounded-full bg-error-container/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-error text-3xl">help_outline</span>
+</div>
+<h3 class="text-xl font-bold mb-4 text-on-surface">自分にできるか不安</h3>
+<p class="text-secondary leading-relaxed">未経験から在宅ワークに挑戦したいけれど、何から始めればいいか分からない。</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+<div class="w-14 h-14 rounded-full bg-error-container/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-error text-3xl">search_off</span>
+</div>
+<h3 class="text-xl font-bold mb-4 text-on-surface">怪しい案件が多い</h3>
+<p class="text-secondary leading-relaxed">SNSや掲示板で見かける募集は、本当に安全なのか判断が難しい。</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+<div class="w-14 h-14 rounded-full bg-error-container/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-error text-3xl">balance</span>
+</div>
+<h3 class="text-xl font-bold mb-4 text-on-surface">仕事と家庭の両立</h3>
+<p class="text-secondary leading-relaxed">育児や家事と並行しながら、無理なく働ける環境を求めている。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-24 bg-white">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="order-2 lg:order-1">
+<img alt="Advisor consulting" class="rounded-2xl shadow-xl w-full" data-alt="Professional woman smiling warmly while working on a laptop in a bright, modern minimalist living room setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAedTibDVlha9sVrb_l4Dff_BCTi_Qx7xpP-C7Y-5Oqof_gDXY7Gjj0xMo_YYJ5N_ZqZC164eu--9Kv8-52a-M_w5jVdxEEsL5hrODvDt-eVD6OP437H8kFo1kXnZYl9EOV8mxWyP8cGy1hcK9WTBao1EgNUcOakvyf2oj2_EN7265gZpJBHlTMqRJmu0YIBBDveI35tT7Yej3KllQyhrbYpSMpBA3cEA3GudcIVqF_lE3bIOQvZYzZBEYXeI9GwToEz3PnJedfS-c"/>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-8">マイリモとは</h2>
+<p class="text-lg text-secondary leading-loose mb-10">
+                        マイリモは、ただの求人サイトではありません。在宅ワークに特化した「安心の入口」です。<br/><br/>
+                        私たちは、すべての掲載企業に対して厳格な審査を行い、労働条件やサポート体制が整っているかを確認しています。また、あなたにぴったりの仕事が見つかるよう、専門のアドバイザーが無料でサポートします。
+                    </p>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<h4 class="font-bold text-on-surface">厳選された優良案件のみ</h4>
+<p class="text-sm text-secondary">信頼できる企業と、透明性の高い仕事内容だけをお届けします。</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<h4 class="font-bold text-on-surface">いつでも気軽にLINE相談</h4>
+<p class="text-sm text-secondary">「何から始めたらいい？」という小さな疑問も、専任スタッフが丁寧にお答えします。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Features / Why Us -->
+<section class="py-24 bg-surface-container">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16">
+<h2 class="font-headline text-3xl font-extrabold text-on-surface mb-4">マイリモが選ばれる理由</h2>
+<p class="text-secondary">私たちが選ばれるのには、確かな理由があります</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[240px]">
+<!-- Big Feature 1 -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-3xl p-10 flex flex-col justify-between overflow-hidden relative">
+<div class="z-10 relative">
+<h3 class="text-2xl font-bold mb-4 text-on-surface">精度の高いマッチング</h3>
+<p class="text-secondary max-w-md">スキルや経験だけでなく、ライフスタイルや「働ける時間」に合わせた最適な仕事をご提案します。</p>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 h-full hidden md:flex items-center justify-center">
+<!-- Custom Diagram: Match Meter -->
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-primary stroke-current match-meter-arc" cx="50" cy="50" fill="transparent" r="40" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center transform rotate-90">
+<span class="text-3xl font-black text-primary font-headline">92%</span>
+<span class="text-[10px] text-secondary font-bold">MATCH RATE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Small Feature -->
+<div class="md:col-span-4 bg-primary text-white rounded-3xl p-10 flex flex-col justify-between">
+<span class="material-symbols-outlined text-5xl opacity-40">security</span>
+<div>
+<h3 class="text-xl font-bold mb-2">100% 安全性保証</h3>
+<p class="text-sm text-white/80">すべての求人に事務局の審査証明が付与されます。</p>
+</div>
+</div>
+<!-- Small Feature -->
+<div class="md:col-span-4 bg-tertiary-container rounded-3xl p-10 flex flex-col justify-between">
+<span class="material-symbols-outlined text-tertiary text-5xl">forum</span>
+<div>
+<h3 class="text-xl font-bold text-on-tertiary-container mb-2">手厚い伴走サポート</h3>
+<p class="text-sm text-on-tertiary-container/80">応募書類の添削や面談対策まで、プロがマンツーマンで支援。</p>
+</div>
+</div>
+<!-- Big Feature 2 -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-3xl p-10 flex items-center gap-10">
+<div class="flex-1">
+<h3 class="text-2xl font-bold mb-4 text-on-surface">在宅ワーク特化のコラム</h3>
+<p class="text-secondary">モチベーション維持や環境構築など、在宅ならではの悩みに対するヒントを毎日更新。</p>
+</div>
+<div class="w-1/3 hidden md:block">
+<img alt="Journaling" class="rounded-xl w-full h-40 object-cover" data-alt="Overhead view of a minimalist workstation with a digital tablet showing a clean interface and a cup of coffee." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKD0zhvYHg6TIMoVOnJHru5oa7UWBF5d6MApFE_eBOx2dp0vF8HVAq41t_pQ3x5fZK6h72K6733d7aQ2uGrz5G8Xdhl18w2WwdrS466sBmoB7qCU9DPNKeSAQF-nqqmEGEItCkbGG9TLqpTL4aA4jVxGm4U--71lLJ6WeQ-Zqv48Uf7_ELEfn06XVos4Vdt-N5ohEcAvCRa7Wz4quCZta21KjcgSwFf5R093npFsIanwnNTmxXfWk3-WQNleMTMYM8zpgxxYrdsyM"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Studies / Columns -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<h2 class="font-headline text-3xl font-extrabold text-on-surface mb-2">在宅ワーク事例 &amp; お役立ちコラム</h2>
+<p class="text-secondary">一足先に踏み出した方々の声と、役立つ知恵をお届け</p>
+</div>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                    一覧を見る
+                    <span class="material-symbols-outlined">chevron_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<article class="group cursor-pointer">
+<div class="rounded-2xl overflow-hidden mb-6 aspect-video">
+<img alt="Work Case Study" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Professional woman speaking during a remote video conference call, looking confident and smiling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMVrdt9BrvpMjXnc585vz8cTwuxVZ7K20eaLJn5Ysf9P0KGDyQyx58IxJuZyKCU6xylpl_AOd2mAut0-ojS4Y_n4mm6-xGOwtsff5IlYjdfa9mHceWNO2T1X0P_E_J_fUgwr79-5oXhvQs0FZQsQzDhCSTLGDhDNUJEPb7NOjCvNRqLQ0NkIxhZzhKNwqQSJrTPV6ywFw1F-SzkbZ0uS_S8FXZYo0jsHtwfE_0If4b0NmptREO8YwJpsdsxcsuScAkjO4As5H4cZE"/>
+</div>
+<div class="space-y-3">
+<span class="text-xs font-bold text-primary tracking-widest uppercase">在宅ワーク事例</span>
+<h3 class="text-xl font-bold text-on-surface group-hover:text-primary transition-colors leading-tight">育児と両立。事務職からリモートアシスタントへ転身した話</h3>
+<p class="text-secondary text-sm line-clamp-2">最初は不安でしたが、時間の融通が利くことで、子供との時間を大切にできるようになりました。</p>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group cursor-pointer">
+<div class="rounded-2xl overflow-hidden mb-6 aspect-video">
+<img alt="Collaboration column" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Diverse team of creative professionals collaborating on a project in a bright shared office space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eKC_ZBlTy0IfQczJ7mhtyh_-uu8CGYKPwObrERR7glseGf7ZLakwL4q4kmYflW1MuFZmxbZD4aog1xDvHsyvWtRRTjQBa-0bBlUa3j4sK-MX75NHSxsrye14EBnpwr4s9cx7yvCT-AxwpRemWFINki5Hoyj6Myj0cBbtPXGg9Q9uW-RhUWWPJDOYlFOXwxFNtr_jtKom3-oL8-6vP9wL8QGC_dvRCky95gVleE-AaKq4RquKQCVmyiAViA8tZAywYaYjaRBKNM8"/>
+</div>
+<div class="space-y-3">
+<span class="text-xs font-bold text-tertiary tracking-widest uppercase">お役立ちコラム</span>
+<h3 class="text-xl font-bold text-on-surface group-hover:text-primary transition-colors leading-tight">孤独を感じない？在宅ワークでのコミュニケーション術</h3>
+<p class="text-secondary text-sm line-clamp-2">チャットツールを効果的に使って、同僚との信頼関係を築くための具体的なステップをご紹介します。</p>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="group cursor-pointer">
+<div class="rounded-2xl overflow-hidden mb-6 aspect-video">
+<img alt="Learning remote tools" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up of hands typing on a laptop keyboard in a warm, cozy interior setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Xh2suHfndSR9z-4u0SPK-bt4flksXdLWZjhpewqsNvTSOp26xEGgyixmQS5--7vqDeVOG81NgOsyLFBsFgR0KNCQddBzqqXQJsWLN06zj1u6zLX3HEZ22A00xS5BmJ81piMy_DliTdo8fxmLC22C0PPVHiA-lmudSZt_Gm7blIqVVGqbN8eH0XaEYF3YVvTJp0NKsWD08cO99Y_WcGc1BaOccqb-FYw4eL9E3fiJDtJP71LEo35Sk7o_nXVSrig2VG9qymKFFtA"/>
+</div>
+<div class="space-y-3">
+<span class="text-xs font-bold text-tertiary tracking-widest uppercase">お役立ちコラム</span>
+<h3 class="text-xl font-bold text-on-surface group-hover:text-primary transition-colors leading-tight">未経験でも大丈夫！在宅で活かせる意外なスキル5選</h3>
+<p class="text-secondary text-sm line-clamp-2">家事の段取りや、これまでの趣味が仕事に。あなたの「当たり前」は誰かの「助け」になります。</p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Final CTA Block -->
+<section class="py-24 bg-surface">
+<div class="max-w-5xl mx-auto px-8">
+<div class="bg-primary-container/30 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+<div class="relative z-10">
+<h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-primary-container mb-6 leading-tight">
+                        あなたの「働きたい」を、<br class="hidden md:block"/>マイリモと一緒に叶えませんか？
+                    </h2>
+<p class="text-on-primary-container/80 text-lg mb-12 max-w-2xl mx-auto">
+                        会員登録は無料です。まずは求人を見るか、LINEで気軽に相談から始めてみてください。
+                    </p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<a href="jobs.html" class="px-12 py-5 rounded-2xl font-bold text-white gradient-primary text-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all inline-block">
+                            求人を見る
+                        </a>
+<button class="px-12 py-5 rounded-2xl font-bold text-primary bg-white text-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+                            LINEで相談する
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-100">
+<div class="max-w-7xl mx-auto px-8 py-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-16">
+<div class="md:col-span-1">
+<div class="text-xl font-bold text-slate-800 font-headline mb-6">MyRemo (マイリモ)</div>
+<p class="text-sm text-slate-500 leading-relaxed mb-6">
+                        在宅ワークに特化した求人・相談サービス。私たちは「働く場所」にとらわれない豊かなキャリアの実現を支援します。
+                    </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-6">サービス</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="jobs.html">求人一覧</a></li>
+<li><a class="hover:text-primary transition-colors" href="index.html">マイリモとは</a></li>
+<li><a class="hover:text-primary transition-colors" href="faq.html">FAQ/流れ</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">掲載希望の企業様</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-6">コンテンツ</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="column-case.html">在宅ワーク事例</a></li>
+<li><a class="hover:text-primary transition-colors" href="column-case.html">お役立ちコラム</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">運営会社</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">お問い合わせ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-6">規約・ポリシー</h4>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">プライバシーポリシー</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">利用規約</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">特定商取引法に基づく表記</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-20 pt-8 border-t border-slate-200 text-center text-xs text-slate-400">
+                © 2024 MyRemo. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>
