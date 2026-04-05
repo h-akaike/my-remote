@@ -3,6 +3,8 @@
 <html class="scroll-smooth" lang="ja"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <title>MyRemo (マイリモ) | 在宅ワークを、ちゃんと選べる入口へ</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -100,17 +102,16 @@
 <!-- Top Navigation Shell -->
 <nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
 <div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto">
-<div class="text-2xl font-black text-slate-800 font-headline">MyRemo (マイリモ)</div>
+<a href="index.html" class="text-2xl font-black text-slate-800 font-headline">MyRemo (マイリモ)</a>
 <div class="hidden md:flex items-center space-x-8 font-manrope text-base font-medium">
-<a class="text-blue-700 font-bold border-b-2 border-blue-700 transition-colors" href="jobs.html">求人一覧</a>
+<a class="text-blue-700 font-bold border-b-2 border-blue-700 transition-colors" href="jobs.html">お仕事を探す</a>
 <a class="text-slate-600 hover:text-blue-600 transition-colors" href="index.html">マイリモとは</a>
 <a class="text-slate-600 hover:text-blue-600 transition-colors" href="faq.html">FAQ/流れ</a>
 <a class="text-slate-600 hover:text-blue-600 transition-colors" href="column-case.html">コラム</a>
 </div>
 <div class="flex items-center space-x-4">
 <a href="login.html" class="hidden lg:block px-5 py-2.5 text-sm font-bold text-primary hover:text-primary-dim transition-all">ログイン</a>
-<button class="hidden lg:block px-6 py-2.5 rounded-xl font-bold text-primary bg-surface-container-high scale-95 active:opacity-80 transition-all">LINE相談</button>
-<a href="jobs.html" class="px-6 py-2.5 rounded-xl font-bold text-on-primary gradient-primary scale-95 active:opacity-80 transition-all shadow-md inline-block">求人を見る</a>
+<a href="login.html" class="px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block">会員登録</a>
 </div>
 </div>
 </nav>
@@ -130,19 +131,15 @@
                 </p>
 <div class="flex flex-col sm:flex-row gap-4">
 <a href="jobs.html" class="px-8 py-4 rounded-xl font-bold text-white gradient-primary text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2 group inline-block">
-                        求人を見る
+                        お仕事を探す
                         <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </a>
-<button class="px-8 py-4 rounded-xl font-bold text-primary bg-surface-container-high text-lg flex items-center justify-center gap-2">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
-                        LINEで相談する
-                    </button>
 </div>
 </div>
 <div class="relative">
 <div class="absolute -top-20 -right-20 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl"></div>
 <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-<img alt="Remote work setup" class="w-full h-[500px] object-cover" data-alt="Modern clean home office desk with a laptop, notebook, and a small plant, bathed in soft morning sunlight through a window." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp00haDlNWPDMGOjVosXWwkj5E2AAMK4365S5G4NIjW9NVE8OfCbWZ5Ubkx-esgs0IMxyvk6Wvpx1_7ldQ4scDJIiUOOwA5ZkPRg8LZL_Z8V3cQ_9BXoDYOyubCFXgkOGeVOGpo8D1LOKngllMvY7vKn1BGomc1zm65nwIBrvBdeytO8f_ldznR49e32yJtMyJ25fG2kyRp5-_bkDCowqDIU2C6j7N64WAOgLbPQwvqGk_IBNroivSkrDGKpd-n-r_QLqFt67tl6w"/>
+<img alt="Remote work setup" class="w-full h-[500px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp00haDlNWPDMGOjVosXWwkj5E2AAMK4365S5G4NIjW9NVE8OfCbWZ5Ubkx-esgs0IMxyvk6Wvpx1_7ldQ4scDJIiUOOwA5ZkPRg8LZL_Z8V3cQ_9BXoDYOyubCFXgkOGeVOGpo8D1LOKngllMvY7vKn1BGomc1zm65nwIBrvBdeytO8f_ldznR49e32yJtMyJ25fG2kyRp5-_bkDCowqDIU2C6j7N64WAOgLbPQwvqGk_IBNroivSkrDGKpd-n-r_QLqFt67tl6w"/>
 <div class="absolute bottom-6 left-6 right-6 bg-white/80 backdrop-blur-md p-6 rounded-xl border border-white/20 shadow-lg">
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center">
@@ -158,6 +155,31 @@
 </div>
 </div>
 </header>
+<!-- Job Search Section -->
+<section class="py-12 bg-white">
+<div class="max-w-4xl mx-auto px-8">
+<form action="jobs.html" class="flex flex-col sm:flex-row gap-4 items-center">
+<div class="flex-1 w-full">
+<div class="flex items-center bg-surface-container rounded-xl px-4 py-3 gap-3">
+<span class="material-symbols-outlined text-secondary">search</span>
+<input type="text" placeholder="キーワードで探す（例：カスタマーサポート、事務）" class="bg-transparent border-none outline-none w-full text-on-surface placeholder:text-secondary text-sm focus:ring-0">
+</div>
+</div>
+<div class="w-full sm:w-48">
+<select class="w-full bg-surface-container border-none rounded-xl text-sm px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20">
+<option>すべての職種</option>
+<option>カスタマーサポート</option>
+<option>事務・アシスタント</option>
+<option>エンジニア</option>
+<option>マーケティング</option>
+</select>
+</div>
+<button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-white bg-gradient-to-br from-primary to-primary-container shadow-md hover:shadow-lg transition-all">
+お仕事を探す
+</button>
+</form>
+</div>
+</section>
 <!-- Pain Points Section -->
 <section class="py-24 bg-surface-container-low">
 <div class="max-w-7xl mx-auto px-8">
@@ -195,7 +217,7 @@
 <div class="max-w-7xl mx-auto px-8">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 <div class="order-2 lg:order-1">
-<img alt="Advisor consulting" class="rounded-2xl shadow-xl w-full" data-alt="Professional woman smiling warmly while working on a laptop in a bright, modern minimalist living room setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAedTibDVlha9sVrb_l4Dff_BCTi_Qx7xpP-C7Y-5Oqof_gDXY7Gjj0xMo_YYJ5N_ZqZC164eu--9Kv8-52a-M_w5jVdxEEsL5hrODvDt-eVD6OP437H8kFo1kXnZYl9EOV8mxWyP8cGy1hcK9WTBao1EgNUcOakvyf2oj2_EN7265gZpJBHlTMqRJmu0YIBBDveI35tT7Yej3KllQyhrbYpSMpBA3cEA3GudcIVqF_lE3bIOQvZYzZBEYXeI9GwToEz3PnJedfS-c"/>
+<img alt="Advisor consulting" class="rounded-2xl shadow-xl w-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAedTibDVlha9sVrb_l4Dff_BCTi_Qx7xpP-C7Y-5Oqof_gDXY7Gjj0xMo_YYJ5N_ZqZC164eu--9Kv8-52a-M_w5jVdxEEsL5hrODvDt-eVD6OP437H8kFo1kXnZYl9EOV8mxWyP8cGy1hcK9WTBao1EgNUcOakvyf2oj2_EN7265gZpJBHlTMqRJmu0YIBBDveI35tT7Yej3KllQyhrbYpSMpBA3cEA3GudcIVqF_lE3bIOQvZYzZBEYXeI9GwToEz3PnJedfS-c"/>
 </div>
 <div class="order-1 lg:order-2">
 <h2 class="font-headline text-4xl font-extrabold text-on-surface mb-8">マイリモとは</h2>
@@ -274,7 +296,7 @@
 <p class="text-secondary">モチベーション維持や環境構築など、在宅ならではの悩みに対するヒントを毎日更新。</p>
 </div>
 <div class="w-1/3 hidden md:block">
-<img alt="Journaling" class="rounded-xl w-full h-40 object-cover" data-alt="Overhead view of a minimalist workstation with a digital tablet showing a clean interface and a cup of coffee." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKD0zhvYHg6TIMoVOnJHru5oa7UWBF5d6MApFE_eBOx2dp0vF8HVAq41t_pQ3x5fZK6h72K6733d7aQ2uGrz5G8Xdhl18w2WwdrS466sBmoB7qCU9DPNKeSAQF-nqqmEGEItCkbGG9TLqpTL4aA4jVxGm4U--71lLJ6WeQ-Zqv48Uf7_ELEfn06XVos4Vdt-N5ohEcAvCRa7Wz4quCZta21KjcgSwFf5R093npFsIanwnNTmxXfWk3-WQNleMTMYM8zpgxxYrdsyM"/>
+<img alt="Journaling" class="rounded-xl w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKD0zhvYHg6TIMoVOnJHru5oa7UWBF5d6MApFE_eBOx2dp0vF8HVAq41t_pQ3x5fZK6h72K6733d7aQ2uGrz5G8Xdhl18w2WwdrS466sBmoB7qCU9DPNKeSAQF-nqqmEGEItCkbGG9TLqpTL4aA4jVxGm4U--71lLJ6WeQ-Zqv48Uf7_ELEfn06XVos4Vdt-N5ohEcAvCRa7Wz4quCZta21KjcgSwFf5R093npFsIanwnNTmxXfWk3-WQNleMTMYM8zpgxxYrdsyM"/>
 </div>
 </div>
 </div>
@@ -297,7 +319,7 @@
 <!-- Card 1 -->
 <a href="column-detail.html" class="group cursor-pointer block">
 <div class="rounded-2xl overflow-hidden mb-6 aspect-video">
-<img alt="Work Case Study" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Professional woman speaking during a remote video conference call, looking confident and smiling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMVrdt9BrvpMjXnc585vz8cTwuxVZ7K20eaLJn5Ysf9P0KGDyQyx58IxJuZyKCU6xylpl_AOd2mAut0-ojS4Y_n4mm6-xGOwtsff5IlYjdfa9mHceWNO2T1X0P_E_J_fUgwr79-5oXhvQs0FZQsQzDhCSTLGDhDNUJEPb7NOjCvNRqLQ0NkIxhZzhKNwqQSJrTPV6ywFw1F-SzkbZ0uS_S8FXZYo0jsHtwfE_0If4b0NmptREO8YwJpsdsxcsuScAkjO4As5H4cZE"/>
+<img alt="Work Case Study" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMVrdt9BrvpMjXnc585vz8cTwuxVZ7K20eaLJn5Ysf9P0KGDyQyx58IxJuZyKCU6xylpl_AOd2mAut0-ojS4Y_n4mm6-xGOwtsff5IlYjdfa9mHceWNO2T1X0P_E_J_fUgwr79-5oXhvQs0FZQsQzDhCSTLGDhDNUJEPb7NOjCvNRqLQ0NkIxhZzhKNwqQSJrTPV6ywFw1F-SzkbZ0uS_S8FXZYo0jsHtwfE_0If4b0NmptREO8YwJpsdsxcsuScAkjO4As5H4cZE"/>
 </div>
 <div class="space-y-3">
 <span class="text-xs font-bold text-primary tracking-widest uppercase">在宅ワーク事例</span>
@@ -308,7 +330,7 @@
 <!-- Card 2 -->
 <a href="column-detail.html" class="group cursor-pointer block">
 <div class="rounded-2xl overflow-hidden mb-6 aspect-video">
-<img alt="Collaboration column" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Diverse team of creative professionals collaborating on a project in a bright shared office space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eKC_ZBlTy0IfQczJ7mhtyh_-uu8CGYKPwObrERR7glseGf7ZLakwL4q4kmYflW1MuFZmxbZD4aog1xDvHsyvWtRRTjQBa-0bBlUa3j4sK-MX75NHSxsrye14EBnpwr4s9cx7yvCT-AxwpRemWFINki5Hoyj6Myj0cBbtPXGg9Q9uW-RhUWWPJDOYlFOXwxFNtr_jtKom3-oL8-6vP9wL8QGC_dvRCky95gVleE-AaKq4RquKQCVmyiAViA8tZAywYaYjaRBKNM8"/>
+<img alt="Collaboration column" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eKC_ZBlTy0IfQczJ7mhtyh_-uu8CGYKPwObrERR7glseGf7ZLakwL4q4kmYflW1MuFZmxbZD4aog1xDvHsyvWtRRTjQBa-0bBlUa3j4sK-MX75NHSxsrye14EBnpwr4s9cx7yvCT-AxwpRemWFINki5Hoyj6Myj0cBbtPXGg9Q9uW-RhUWWPJDOYlFOXwxFNtr_jtKom3-oL8-6vP9wL8QGC_dvRCky95gVleE-AaKq4RquKQCVmyiAViA8tZAywYaYjaRBKNM8"/>
 </div>
 <div class="space-y-3">
 <span class="text-xs font-bold text-tertiary tracking-widest uppercase">お役立ちコラム</span>
@@ -319,7 +341,7 @@
 <!-- Card 3 -->
 <a href="column-detail.html" class="group cursor-pointer block">
 <div class="rounded-2xl overflow-hidden mb-6 aspect-video">
-<img alt="Learning remote tools" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up of hands typing on a laptop keyboard in a warm, cozy interior setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Xh2suHfndSR9z-4u0SPK-bt4flksXdLWZjhpewqsNvTSOp26xEGgyixmQS5--7vqDeVOG81NgOsyLFBsFgR0KNCQddBzqqXQJsWLN06zj1u6zLX3HEZ22A00xS5BmJ81piMy_DliTdo8fxmLC22C0PPVHiA-lmudSZt_Gm7blIqVVGqbN8eH0XaEYF3YVvTJp0NKsWD08cO99Y_WcGc1BaOccqb-FYw4eL9E3fiJDtJP71LEo35Sk7o_nXVSrig2VG9qymKFFtA"/>
+<img alt="Learning remote tools" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Xh2suHfndSR9z-4u0SPK-bt4flksXdLWZjhpewqsNvTSOp26xEGgyixmQS5--7vqDeVOG81NgOsyLFBsFgR0KNCQddBzqqXQJsWLN06zj1u6zLX3HEZ22A00xS5BmJ81piMy_DliTdo8fxmLC22C0PPVHiA-lmudSZt_Gm7blIqVVGqbN8eH0XaEYF3YVvTJp0NKsWD08cO99Y_WcGc1BaOccqb-FYw4eL9E3fiJDtJP71LEo35Sk7o_nXVSrig2VG9qymKFFtA"/>
 </div>
 <div class="space-y-3">
 <span class="text-xs font-bold text-tertiary tracking-widest uppercase">お役立ちコラム</span>
@@ -376,7 +398,7 @@
 <div>
 <h4 class="font-bold text-slate-800 mb-6">サービス</h4>
 <ul class="space-y-4 text-sm text-slate-500">
-<li><a class="hover:text-primary transition-colors" href="jobs.html">求人一覧</a></li>
+<li><a class="hover:text-primary transition-colors" href="jobs.html">お仕事を探す</a></li>
 <li><a class="hover:text-primary transition-colors" href="index.html">マイリモとは</a></li>
 <li><a class="hover:text-primary transition-colors" href="faq.html">FAQ/流れ</a></li>
 <li><a class="hover:text-primary transition-colors" href="#">掲載希望の企業様</a></li>

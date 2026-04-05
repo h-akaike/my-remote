@@ -3,6 +3,8 @@
 <html class="scroll-smooth" lang="ja"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <title>FAQ / 契約形態 / 応募の流れ - MyRemo (マイリモ)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -89,17 +91,16 @@
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none h-20 flex items-center">
 <div class="flex justify-between items-center px-8 w-full max-w-7xl mx-auto">
-<div class="text-2xl font-black text-slate-800 dark:text-slate-100 font-headline">MyRemo (マイリモ)</div>
+<a href="index.html" class="text-2xl font-black text-slate-800 dark:text-slate-100 font-headline">MyRemo (マイリモ)</a>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="jobs.html">求人一覧</a>
+<a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="jobs.html">お仕事を探す</a>
 <a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="index.html">マイリモとは</a>
 <a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 font-manrope text-base transition-colors" href="faq.html">FAQ/流れ</a>
 <a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="column-case.html">コラム</a>
 </div>
 <div class="flex items-center gap-4">
 <a href="login.html" class="hidden lg:block px-5 py-2.5 text-sm font-bold text-primary hover:text-primary-dim transition-all">ログイン</a>
-<button class="hidden lg:block px-6 py-2.5 rounded-xl bg-surface-container-high text-primary font-bold hover:opacity-80 transition-all scale-95 active:opacity-80">LINE相談</button>
-<a href="jobs.html" class="px-6 py-2.5 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block">求人を見る</a>
+<a href="login.html" class="px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block">会員登録</a>
 </div>
 </div>
 </nav>
@@ -119,7 +120,7 @@
 </div>
 <div class="flex-1 relative">
 <div class="absolute -top-12 -right-12 w-64 h-64 bg-tertiary-container/30 rounded-full blur-3xl"></div>
-<img alt="Help Center" class="rounded-[2rem] shadow-2xl relative z-10 object-cover w-full h-80 lg:h-[450px]" data-alt="A confident smiling woman working on a laptop in a bright modern home office with warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcmSHjGdylJWU0Ky8iK6Pcm7cI7ril8AzQb9JuHjK1iyTW3Ynxd9cxnVY8POjut7e78sx7fzW_Fmt-3QDwkHfAhRXtLEy7u6u3hmJTSf4tJHADpoBs37yvvbGuhc98cdNoLVKV74cX0IrtZmOoRkRsu7pKbyGxwbYFcbwPZnUvLNYl5VEKOU1bTbiiJDJDNurfBWhgLsnBu6F7MERzd4thZTpWCEK451RKMBnyIVxUV_XKxkqob1R6u3Qutc45oTazbs3M1yGCfsY"/>
+<img alt="Help Center" class="rounded-[2rem] shadow-2xl relative z-10 object-cover w-full h-80 lg:h-[450px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcmSHjGdylJWU0Ky8iK6Pcm7cI7ril8AzQb9JuHjK1iyTW3Ynxd9cxnVY8POjut7e78sx7fzW_Fmt-3QDwkHfAhRXtLEy7u6u3hmJTSf4tJHADpoBs37yvvbGuhc98cdNoLVKV74cX0IrtZmOoRkRsu7pKbyGxwbYFcbwPZnUvLNYl5VEKOU1bTbiiJDJDNurfBWhgLsnBu6F7MERzd4thZTpWCEK451RKMBnyIVxUV_XKxkqob1R6u3Qutc45oTazbs3M1yGCfsY"/>
 </div>
 </div>
 </section>
@@ -194,189 +195,38 @@
                         </p>
 </div>
 </details>
+<!-- Accordion Item: 応募の流れ -->
+<details class="group bg-surface-container-lowest rounded-2xl overflow-hidden transition-all duration-300 open:ring-1 open:ring-primary/20">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none group-hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-lg">Q</span>
+<span class="text-lg font-bold text-on-surface">応募の流れはどうなっていますか？</span>
 </div>
-</section>
-<!-- Contract Type Section -->
-<section class="bg-surface-container py-24 mb-32">
-<div class="max-w-7xl mx-auto px-8">
-<div class="text-center mb-16">
-<h2 class="text-3xl lg:text-4xl font-black font-headline mb-4">契約形態について</h2>
-<p class="text-on-surface-variant">MyRemoは、ワーカーの皆様と企業を繋ぐパートナーとして、安全な取引を保証します。</p>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180 text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pl-16">
+<div class="w-full h-px bg-surface-container mb-4"></div>
+<p class="text-on-surface-variant leading-relaxed">
+LINE登録 → お問い合わせ・相談 → 求人のご提案 → 正式応募 → 面談日程の調整 → オンライン面談 → お仕事スタート、という流れです。すべてオンラインで完結し、面談も1回のみのケースがほとんどです。初めての方でもコンサルタントが丁寧にサポートいたしますので、ご安心ください。
+</p>
 </div>
-<!-- Professional Diagram -->
-<div class="relative max-w-5xl mx-auto py-12 px-6 bg-surface-container-lowest rounded-[3rem] shadow-sm">
-<div class="flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0 relative">
-<!-- Client Enterprise -->
-<div class="w-full md:w-64 text-center group">
-<div class="w-24 h-24 bg-surface-container mx-auto rounded-3xl flex items-center justify-center mb-4 group-hover:bg-primary/5 transition-colors">
-<span class="material-symbols-outlined text-4xl text-primary" data-icon="business">business</span>
+</details>
+<!-- Accordion Item: 契約形態 -->
+<details class="group bg-surface-container-lowest rounded-2xl overflow-hidden transition-all duration-300 open:ring-1 open:ring-primary/20">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none group-hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-lg">Q</span>
+<span class="text-lg font-bold text-on-surface">契約形態はどのようになっていますか？</span>
 </div>
-<h3 class="font-bold text-xl mb-2">クライアント企業</h3>
-<p class="text-sm text-on-surface-variant">業務の発注・指揮命令</p>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180 text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pl-16">
+<div class="w-full h-px bg-surface-container mb-4"></div>
+<p class="text-on-surface-variant leading-relaxed">
+MyRemoがクライアント企業とワーカーの間に入り、業務委託契約を締結します。MyRemoが間に入ることで、報酬の未払いやトラブルを未然に防ぎ、安心して働ける環境を提供しています。報酬は基本的に月末締め・翌月15日払いです。
+</p>
 </div>
-<!-- Connector Arrows 1 -->
-<div class="hidden md:flex flex-col items-center justify-center gap-2 flex-1 px-4">
-<div class="h-0.5 w-full bg-gradient-to-r from-primary/20 via-primary to-primary/20 relative">
-<span class="material-symbols-outlined absolute -top-3 left-0 text-primary/40 rotate-180" data-icon="arrow_forward">arrow_forward</span>
-<span class="material-symbols-outlined absolute -top-3 right-0 text-primary/40" data-icon="arrow_forward">arrow_forward</span>
-</div>
-<span class="text-[10px] font-bold tracking-widest text-primary uppercase">業務委託・人材紹介</span>
-</div>
-<!-- MyRemo -->
-<div class="w-full md:w-80 text-center relative z-10">
-<div class="bg-gradient-to-br from-primary to-primary-dim p-8 rounded-[2.5rem] shadow-xl transform hover:scale-105 transition-transform">
-<div class="w-16 h-16 bg-white/20 backdrop-blur-md mx-auto rounded-2xl flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-3xl text-white" data-icon="hub">hub</span>
-</div>
-<h3 class="font-bold text-2xl text-white mb-2">MyRemo (マイリモ)</h3>
-<p class="text-white/80 text-sm">マッチング・管理・支払い</p>
-</div>
-</div>
-<!-- Connector Arrows 2 -->
-<div class="hidden md:flex flex-col items-center justify-center gap-2 flex-1 px-4">
-<div class="h-0.5 w-full bg-gradient-to-r from-primary/20 via-primary to-primary/20 relative">
-<span class="material-symbols-outlined absolute -top-3 left-0 text-primary/40 rotate-180" data-icon="arrow_forward">arrow_forward</span>
-<span class="material-symbols-outlined absolute -top-3 right-0 text-primary/40" data-icon="arrow_forward">arrow_forward</span>
-</div>
-<span class="text-[10px] font-bold tracking-widest text-primary uppercase">契約・報酬支払い</span>
-</div>
-<!-- Worker -->
-<div class="w-full md:w-64 text-center group">
-<div class="w-24 h-24 bg-surface-container mx-auto rounded-3xl flex items-center justify-center mb-4 group-hover:bg-primary/5 transition-colors">
-<span class="material-symbols-outlined text-4xl text-primary" data-icon="person">person</span>
-</div>
-<h3 class="font-bold text-xl mb-2">ワーカー (あなた)</h3>
-<p class="text-sm text-on-surface-variant">業務の遂行・成果提供</p>
-</div>
-</div>
-<!-- Diagram Bottom Label -->
-<div class="mt-12 p-6 bg-primary/5 rounded-2xl text-center">
-<p class="text-primary font-bold">
-<span class="material-symbols-outlined align-middle mr-2" data-icon="verified">verified</span>
-                            MyRemoが間に入ることで、報酬の未払いやトラブルを未然に防ぎ、安心して働ける環境を提供します。
-                        </p>
-</div>
-</div>
-</div>
-</section>
-<!-- Flow Steps Section -->
-<section class="max-w-7xl mx-auto px-8">
-<div class="text-center mb-20">
-<h2 class="text-3xl lg:text-4xl font-black font-headline mb-4 text-on-surface">応募の流れ</h2>
-<p class="text-on-surface-variant">LINE登録からお仕事開始まで、スムーズなステップをご案内します。</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-<!-- Step 1 -->
-<div class="relative group">
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] h-full transition-all hover:shadow-xl hover:-translate-y-2">
-<div class="flex items-start justify-between mb-6">
-<div class="w-14 h-14 bg-[#06C755]/10 rounded-2xl flex items-center justify-center">
-<span class="material-symbols-outlined text-[#06C755] text-3xl" data-icon="chat">chat</span>
-</div>
-<span class="text-4xl font-black text-primary/10">01</span>
-</div>
-<h4 class="text-xl font-bold mb-3">LINE登録</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">まずは公式LINEを追加。最新の求人情報や個別相談がここから始まります。</p>
-</div>
-<div class="hidden lg:block absolute top-1/2 -right-4 translate-y-[-50%] z-10">
-<span class="material-symbols-outlined text-primary/30 text-3xl" data-icon="chevron_right">chevron_right</span>
-</div>
-</div>
-<!-- Step 2 -->
-<div class="relative group">
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] h-full transition-all hover:shadow-xl hover:-translate-y-2">
-<div class="flex items-start justify-between mb-6">
-<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="support_agent">support_agent</span>
-</div>
-<span class="text-4xl font-black text-primary/10">02</span>
-</div>
-<h4 class="text-xl font-bold mb-3">お問い合わせ・相談</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">ご希望の条件や現在のスキルについて、コンサルタントにお気軽にご相談ください。</p>
-</div>
-<div class="hidden lg:block absolute top-1/2 -right-4 translate-y-[-50%] z-10">
-<span class="material-symbols-outlined text-primary/30 text-3xl" data-icon="chevron_right">chevron_right</span>
-</div>
-</div>
-<!-- Step 3 -->
-<div class="relative group">
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] h-full transition-all hover:shadow-xl hover:-translate-y-2">
-<div class="flex items-start justify-between mb-6">
-<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="search">search</span>
-</div>
-<span class="text-4xl font-black text-primary/10">03</span>
-</div>
-<h4 class="text-xl font-bold mb-3">求人詳細の閲覧</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">非公開求人を含む、あなたにぴったりの案件をピックアップしてご提案します。</p>
-</div>
-<div class="hidden lg:block absolute top-1/2 -right-4 translate-y-[-50%] z-10">
-<span class="material-symbols-outlined text-primary/30 text-3xl" data-icon="chevron_right">chevron_right</span>
-</div>
-</div>
-<!-- Step 4 -->
-<div class="relative group">
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] h-full transition-all hover:shadow-xl hover:-translate-y-2">
-<div class="flex items-start justify-between mb-6">
-<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="edit_note">edit_note</span>
-</div>
-<span class="text-4xl font-black text-primary/10">04</span>
-</div>
-<h4 class="text-xl font-bold mb-3">正式応募</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">気になる求人があれば応募意思をお伝えください。選考のサポートをいたします。</p>
-</div>
-</div>
-<!-- Step 5 -->
-<div class="relative group lg:mt-8">
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] h-full transition-all hover:shadow-xl hover:-translate-y-2">
-<div class="flex items-start justify-between mb-6">
-<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="calendar_month">calendar_month</span>
-</div>
-<span class="text-4xl font-black text-primary/10">05</span>
-</div>
-<h4 class="text-xl font-bold mb-3">面談日程の調整</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">企業との面談日程をMyRemoが調整。忙しい方でもスムーズに進められます。</p>
-</div>
-<div class="hidden lg:block absolute top-1/2 -right-4 translate-y-[-50%] z-10">
-<span class="material-symbols-outlined text-primary/30 text-3xl" data-icon="chevron_right">chevron_right</span>
-</div>
-</div>
-<!-- Step 6 -->
-<div class="relative group lg:mt-8">
-<div class="bg-surface-container-lowest p-8 rounded-[2rem] h-full transition-all hover:shadow-xl hover:-translate-y-2">
-<div class="flex items-start justify-between mb-6">
-<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="groups">groups</span>
-</div>
-<span class="text-4xl font-black text-primary/10">06</span>
-</div>
-<h4 class="text-xl font-bold mb-3">面談（オンライン）</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">企業の担当者とオンラインで面談。業務内容の確認や質問を行えます。</p>
-</div>
-<div class="hidden lg:block absolute top-1/2 -right-4 translate-y-[-50%] z-10">
-<span class="material-symbols-outlined text-primary/30 text-3xl" data-icon="chevron_right">chevron_right</span>
-</div>
-</div>
-<!-- Step 7 -->
-<div class="relative group lg:mt-8 md:col-span-2">
-<div class="bg-gradient-to-br from-primary to-primary-dim p-8 rounded-[2rem] h-full transition-all hover:shadow-xl hover:-translate-y-2 flex flex-col md:flex-row items-center gap-8">
-<div class="flex-shrink-0">
-<div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-5xl" data-icon="celebration">celebration</span>
-</div>
-</div>
-<div>
-<div class="flex items-center gap-4 mb-2">
-<span class="px-3 py-1 bg-white/20 rounded-full text-xs font-bold text-white uppercase">Final Step</span>
-<span class="text-3xl font-black text-white/20">07</span>
-</div>
-<h4 class="text-2xl font-bold text-white mb-2">お仕事スタート！</h4>
-<p class="text-white/80 leading-relaxed">マッチング成立。リモートワーク生活の始まりです。就業後もしっかりサポートします。</p>
-</div>
-</div>
-</div>
+</details>
 </div>
 </section>
 <!-- CTA Section -->
@@ -384,16 +234,13 @@
 <div class="bg-slate-900 rounded-[3rem] p-12 text-center text-white relative overflow-hidden">
 <div class="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
 <div class="relative z-10">
-<h2 class="text-3xl md:text-5xl font-black font-headline mb-8">まずはLINEで無料相談から</h2>
-<p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">あなたに合った働き方を一緒に見つけましょう。<br class="hidden md:block"/>登録は30秒で完了します。</p>
-<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<h2 class="text-3xl md:text-5xl font-black font-headline mb-8">ご不明な点はありませんか？</h2>
+<p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">よくある質問で解決しない場合は、<br class="hidden md:block"/>お気軽にLINEからお問い合わせください。</p>
+<div class="flex justify-center">
 <button class="px-12 py-5 bg-[#06C755] text-white rounded-full font-bold text-xl shadow-lg hover:opacity-90 transition-all flex items-center justify-center gap-3">
-<span class="material-symbols-outlined" data-icon="chat">chat</span>
-                            LINEで相談する
-                        </button>
-<button class="px-12 py-5 bg-white text-slate-900 rounded-full font-bold text-xl shadow-lg hover:bg-slate-100 transition-all">
-                            求人一覧を見る
-                        </button>
+<span class="material-symbols-outlined">chat</span>
+LINEで問い合わせる
+</button>
 </div>
 </div>
 </div>
@@ -412,7 +259,7 @@
 <div class="space-y-4">
 <div class="font-bold text-slate-800 dark:text-slate-200">サービス</div>
 <ul class="space-y-2">
-<li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="jobs.html">求人一覧</a></li>
+<li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="jobs.html">お仕事を探す</a></li>
 <li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="index.html">マイリモとは</a></li>
 <li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="faq.html">FAQ/流れ</a></li>
 </ul>

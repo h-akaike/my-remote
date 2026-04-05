@@ -2,7 +2,10 @@
 
 <html lang="ja"><head>
 <meta charset="utf-8"/>
+<title>コラム・事例一覧 - MyRemo (マイリモ)</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -91,17 +94,16 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none">
 <div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto">
-<div class="text-2xl font-black text-slate-800 dark:text-slate-100 font-headline">MyRemo (マイリモ)</div>
+<a href="index.html" class="text-2xl font-black text-slate-800 dark:text-slate-100 font-headline">MyRemo (マイリモ)</a>
 <nav class="hidden md:flex items-center space-x-8">
-<a class="font-manrope text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" href="jobs.html">求人一覧</a>
+<a class="font-manrope text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" href="jobs.html">お仕事を探す</a>
 <a class="font-manrope text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" href="index.html">マイリモとは</a>
 <a class="font-manrope text-base font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" href="faq.html">FAQ/流れ</a>
 <a class="font-manrope text-base font-bold text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 transition-colors" href="column-case.html">コラム</a>
 </nav>
 <div class="flex items-center gap-4">
 <a href="login.html" class="hidden lg:block px-5 py-2.5 text-sm font-bold text-primary hover:text-primary-dim transition-all">ログイン</a>
-<button class="hidden lg:block px-5 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-all scale-95 active:opacity-80">LINE相談</button>
-<a class="inline-block px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all scale-95 active:opacity-80" href="jobs.html">求人を見る</a>
+<a href="login.html" class="px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block">会員登録</a>
 </div>
 </div>
 </header>
@@ -138,7 +140,7 @@
 <!-- Main Eyecatch -->
 <section class="max-w-5xl mx-auto px-6 mb-16">
 <div class="relative aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl">
-<img class="w-full h-full object-cover" data-alt="Modern workspace with a clean laptop, coffee cup, and soft morning light filtering through a window, serene atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDStO0Qez5cNomFaCFn-yYdT1sA__R_I-yAK5kDXsQ8o3czjP88xj55KpB-8SuMvGimCV0UgAbULoP7eq8LHSETc4iKVf0v8ATMLogdUm7Ao7NadwHRV_7V2mD7SCsHb77IchlPFoQyo8LNOW72p0ttjulC3yotus6qWKVf20bIO5pfzyNxaQ8J-cwrKgsz1GT5mTz_bUeGQ1Rdu6O4J4js2N_WecG5AggWqhIDk95R_SDiilDGjJmEtm35-j51P1e56H4dLRQvOLY"/>
+<img class="w-full h-full object-cover" alt="Modern workspace with a clean laptop, coffee cup, and soft morning light filtering through a window, serene atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDStO0Qez5cNomFaCFn-yYdT1sA__R_I-yAK5kDXsQ8o3czjP88xj55KpB-8SuMvGimCV0UgAbULoP7eq8LHSETc4iKVf0v8ATMLogdUm7Ao7NadwHRV_7V2mD7SCsHb77IchlPFoQyo8LNOW72p0ttjulC3yotus6qWKVf20bIO5pfzyNxaQ8J-cwrKgsz1GT5mTz_bUeGQ1Rdu6O4J4js2N_WecG5AggWqhIDk95R_SDiilDGjJmEtm35-j51P1e56H4dLRQvOLY"/>
 <div class="absolute inset-0 bg-gradient-to-t from-on-surface/20 to-transparent"></div>
 </div>
 </section>
@@ -165,7 +167,7 @@
 </li>
 </ul>
 <div class="my-12 rounded-2xl overflow-hidden shadow-sm">
-<img class="w-full aspect-video object-cover" data-alt="Professional home office setup with dual monitors, ergonomic chair, and minimalist desk accessories in a brightly lit room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyWn2BNkZffd97At5Bn59MsyUssjX2kC7t7xTOIGk2Kg_p0o_6SLx7VKJMC8e0dSB7Wpp3bwj0sXz7LxAhSadg6G-OEK5UmheGtdA5iGIZCvT0lPLwLwwsfEonJVaP3aYjcnC349Vv78RxuCycto5INo7V5QbRZWNJdSBxTOBEqUE0iAC78YFj-cwergZKCJJdSsc6Ew_QTLhyzsWk1-uIMvzatHryszHOingyCxMGtsZz5fKandu-BcKpqs5U2N0g-GddKb97MwQ"/>
+<img class="w-full aspect-video object-cover" alt="Professional home office setup with dual monitors, ergonomic chair, and minimalist desk accessories in a brightly lit room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyWn2BNkZffd97At5Bn59MsyUssjX2kC7t7xTOIGk2Kg_p0o_6SLx7VKJMC8e0dSB7Wpp3bwj0sXz7LxAhSadg6G-OEK5UmheGtdA5iGIZCvT0lPLwLwwsfEonJVaP3aYjcnC349Vv78RxuCycto5INo7V5QbRZWNJdSBxTOBEqUE0iAC78YFj-cwergZKCJJdSsc6Ew_QTLhyzsWk1-uIMvzatHryszHOingyCxMGtsZz5fKandu-BcKpqs5U2N0g-GddKb97MwQ"/>
 <p class="text-xs text-on-surface-variant text-center mt-3 font-label italic">理想的なホームオフィスのレイアウト例</p>
 </div>
 <h2 class="text-3xl font-bold font-headline mt-16 mb-8 border-l-4 border-primary pl-6 py-1">
@@ -246,7 +248,7 @@
 <!-- Card 1 -->
 <a href="column-detail.html" class="group cursor-pointer block">
 <div class="aspect-video rounded-2xl overflow-hidden mb-5 shadow-sm">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Group of diverse professionals working together in a light-filled modern office space with laptop and notebooks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-a2C6rJNzpB0wwPnZBeOb9wR0DCHBsjf90qGwgIXR_OlcOa-5--FIUaCcgnXfp8o1nsRX5GRa8hvnnnSTqgQYsyLnrjNh3o6tVxT_jl2Sd8Kg8DZLc_T9tAMOYRMyGHBbvf3JuNhVfGtrVE-AkEPTJ5yDddZYEyqtW1MReR6Ib_fSw1LnBhYdkVEhDOnCfE_DBthW0ff110zO4ionhgYyF_FOxmHOXJuzBM2ZWiT36yCokPkhQlsjjzBwfhoSXl71LUWZlV-P8sY"/>
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Group of diverse professionals working together in a light-filled modern office space with laptop and notebooks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-a2C6rJNzpB0wwPnZBeOb9wR0DCHBsjf90qGwgIXR_OlcOa-5--FIUaCcgnXfp8o1nsRX5GRa8hvnnnSTqgQYsyLnrjNh3o6tVxT_jl2Sd8Kg8DZLc_T9tAMOYRMyGHBbvf3JuNhVfGtrVE-AkEPTJ5yDddZYEyqtW1MReR6Ib_fSw1LnBhYdkVEhDOnCfE_DBthW0ff110zO4ionhgYyF_FOxmHOXJuzBM2ZWiT36yCokPkhQlsjjzBwfhoSXl71LUWZlV-P8sY"/>
 </div>
 <span class="text-xs font-bold text-secondary font-label bg-secondary-container px-3 py-1 rounded-full">キャリア</span>
 <h3 class="text-lg font-bold font-headline mt-4 leading-snug group-hover:text-primary transition-colors">
@@ -257,7 +259,7 @@
 <!-- Card 2 -->
 <a href="column-detail.html" class="group cursor-pointer block">
 <div class="aspect-video rounded-2xl overflow-hidden mb-5 shadow-sm">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern desk setup with multiple screens showing coding projects and a notebook with wireframe sketches" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEHnwafEM8VNOivSjZkMTE7IPf_kpS8KlvveiCpxW7SE8ucglddbC_U4uFyO6W7DUbwWQfg53rcmBL7qsy53tu4IlB9C0OAixhSeOpGQAeUigd2rZBHw9LeB4I12cmqT0JEPmNbKPp-stjhXDA5he7PqqwpcQ-7JQcfjlPCFIX3795fmn1P7m_5gG7ZmHgd8eftTWq55BkCVy7tnc75XjJ2OSybiE4XSR4C6nTCQXTWVrqb0xUvrIfYzH6ftQNhvozNMPQGNN31ME"/>
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Modern desk setup with multiple screens showing coding projects and a notebook with wireframe sketches" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEHnwafEM8VNOivSjZkMTE7IPf_kpS8KlvveiCpxW7SE8ucglddbC_U4uFyO6W7DUbwWQfg53rcmBL7qsy53tu4IlB9C0OAixhSeOpGQAeUigd2rZBHw9LeB4I12cmqT0JEPmNbKPp-stjhXDA5he7PqqwpcQ-7JQcfjlPCFIX3795fmn1P7m_5gG7ZmHgd8eftTWq55BkCVy7tnc75XjJ2OSybiE4XSR4C6nTCQXTWVrqb0xUvrIfYzH6ftQNhvozNMPQGNN31ME"/>
 </div>
 <span class="text-xs font-bold text-secondary font-label bg-secondary-container px-3 py-1 rounded-full">ツール</span>
 <h3 class="text-lg font-bold font-headline mt-4 leading-snug group-hover:text-primary transition-colors">
@@ -268,7 +270,7 @@
 <!-- Card 3 -->
 <a href="column-detail.html" class="group cursor-pointer block">
 <div class="aspect-video rounded-2xl overflow-hidden mb-5 shadow-sm">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A smiling woman sitting in a cozy living room, having a remote meeting on her laptop with a bright, welcoming ambiance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3ntzwoZ1o3fgymZXbN0S1mFmOHhdR2WzPFeaD05Tua8dio0RA2c-_-rS6ZCMt3DlXXv36MOwhYJOD4UrXN31ofvjj1zrgJyrddkGGjn3dh4AgYp2Pe6yyNJIFgARu6Z2qLSD2L6q7xYZMB6fyoJepCwQ6e7y8WsG6VaKTkZVjPHfF66W4qlZx_c-Ltipofm1x98749Z8Ee-AODPKEs0acYXRwC37CivYO_vK2iLJCxbqBQksJAKOa_xrBv2_1V8lYi72JYy5gRwQ"/>
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="A smiling woman sitting in a cozy living room, having a remote meeting on her laptop with a bright, welcoming ambiance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3ntzwoZ1o3fgymZXbN0S1mFmOHhdR2WzPFeaD05Tua8dio0RA2c-_-rS6ZCMt3DlXXv36MOwhYJOD4UrXN31ofvjj1zrgJyrddkGGjn3dh4AgYp2Pe6yyNJIFgARu6Z2qLSD2L6q7xYZMB6fyoJepCwQ6e7y8WsG6VaKTkZVjPHfF66W4qlZx_c-Ltipofm1x98749Z8Ee-AODPKEs0acYXRwC37CivYO_vK2iLJCxbqBQksJAKOa_xrBv2_1V8lYi72JYy5gRwQ"/>
 </div>
 <span class="text-xs font-bold text-secondary font-label bg-secondary-container px-3 py-1 rounded-full">ライフスタイル</span>
 <h3 class="text-lg font-bold font-headline mt-4 leading-snug group-hover:text-primary transition-colors">
@@ -291,7 +293,7 @@
 <div>
 <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-6 font-headline">コンテンツ</h4>
 <ul class="space-y-4 font-plus-jakarta text-sm">
-<li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4" href="jobs.html">求人一覧</a></li>
+<li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4" href="jobs.html">お仕事を探す</a></li>
 <li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4" href="index.html">マイリモとは</a></li>
 <li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4" href="column-case.html">コラム</a></li>
 </ul>
