@@ -96,11 +96,23 @@
 <a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="jobs.html">お仕事を探す</a>
 <a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="index.html">マイリモとは</a>
 <a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 font-manrope text-base transition-colors" href="faq.html">FAQ/流れ</a>
-<a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="column-case.html">コラム</a>
+<a class="text-slate-600 dark:text-slate-400 font-manrope text-base font-medium hover:text-blue-600 transition-colors" href="columns.html">コラム</a>
 </div>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 md:gap-4">
+<button class="md:hidden p-2 -mr-1 text-slate-700" aria-label="メニュー" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+<span class="material-symbols-outlined">menu</span>
+</button>
 <a href="login.html" class="hidden lg:block px-5 py-2.5 text-sm font-bold text-primary hover:text-primary-dim transition-all">ログイン</a>
-<a href="login.html" class="px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block">会員登録</a>
+<a href="register.html" class="px-4 md:px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block text-sm md:text-base">会員登録</a>
+</div>
+</div>
+<div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-lg shadow-lg border-t border-outline-variant/20">
+<div class="flex flex-col py-4 px-6 gap-1">
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="jobs.html">お仕事を探す</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="index.html">マイリモとは</a>
+<a class="py-3 px-4 rounded-xl text-primary font-bold bg-primary/5" href="faq.html">FAQ/流れ</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="columns.html">コラム</a>
+<a class="py-3 px-4 rounded-xl text-primary font-bold hover:bg-surface-container-low" href="login.html">ログイン</a>
 </div>
 </div>
 </nav>
@@ -267,7 +279,7 @@ LINEで問い合わせる
 <div class="space-y-4">
 <div class="font-bold text-slate-800 dark:text-slate-200">サポート</div>
 <ul class="space-y-2">
-<li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="column-case.html">コラム</a></li>
+<li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="columns.html">コラム</a></li>
 <li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="#">プライバシーポリシー</a></li>
 <li><a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 transition-opacity font-plus-jakarta text-sm" href="#">利用規約</a></li>
 </ul>

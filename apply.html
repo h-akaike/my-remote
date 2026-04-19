@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<title>応募フォーム - MyRemo (マイリモ)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#393057",
+              "inverse-primary": "#7cbbfc",
+              "surface": "#f7f9fb",
+              "inverse-surface": "#0b0f10",
+              "secondary-fixed": "#cde5fc",
+              "primary": "#11639e",
+              "error": "#a83836",
+              "on-background": "#2c3437",
+              "on-primary-container": "#00375d",
+              "on-tertiary-container": "#4c436c",
+              "background": "#f7f9fb",
+              "primary-fixed-dim": "#6eaded",
+              "tertiary": "#635983",
+              "primary-fixed": "#7cbbfc",
+              "secondary-dim": "#3f5668",
+              "on-tertiary-fixed-variant": "#564c76",
+              "outline-variant": "#acb3b7",
+              "on-primary-fixed-variant": "#00406b",
+              "outline": "#747c80",
+              "secondary-fixed-dim": "#bfd7ed",
+              "surface-container-low": "#f0f4f7",
+              "primary-dim": "#00568e",
+              "surface-container": "#eaeff2",
+              "secondary-container": "#cde5fc",
+              "on-error-container": "#6e0a12",
+              "on-secondary-fixed-variant": "#475e70",
+              "surface-dim": "#d4dbdf",
+              "tertiary-fixed-dim": "#ccc0f0",
+              "tertiary-dim": "#574d76",
+              "tertiary-container": "#dacdff",
+              "on-primary-fixed": "#001f38",
+              "on-secondary": "#f5f9ff",
+              "surface-variant": "#dce4e8",
+              "secondary": "#4b6274",
+              "primary-container": "#7cbbfc",
+              "on-surface": "#2c3437",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#f7f9ff",
+              "on-surface-variant": "#596064",
+              "on-tertiary": "#fdf7ff",
+              "on-error": "#fff7f6",
+              "tertiary-fixed": "#dacdff",
+              "surface-container-highest": "#dce4e8",
+              "on-secondary-fixed": "#2b4253",
+              "error-container": "#fa746f",
+              "surface-bright": "#f7f9fb",
+              "surface-container-high": "#e3e9ed",
+              "error-dim": "#67040d",
+              "surface-tint": "#11639e",
+              "on-secondary-container": "#3d5466",
+              "inverse-on-surface": "#9a9d9f"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .tonal-transition { transition: background-color 0.3s ease; }
+      .glass-nav { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 glass-nav shadow-sm tonal-transition">
+<nav class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto">
+<a href="index.html" class="text-2xl font-black text-slate-800 font-headline tracking-tighter">MyRemo (マイリモ)</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 hover:text-blue-600 transition-colors font-manrope text-base font-medium py-2" href="jobs.html">お仕事を探す</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors font-manrope text-base font-medium py-2" href="index.html">マイリモとは</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors font-manrope text-base font-medium py-2" href="faq.html">FAQ/流れ</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors font-manrope text-base font-medium py-2" href="columns.html">コラム</a>
+</div>
+<div class="flex items-center gap-2 md:gap-4">
+<button class="md:hidden p-2 -mr-1 text-slate-700" aria-label="メニュー" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<a href="login.html" class="hidden lg:block px-5 py-2.5 text-sm font-bold text-primary hover:text-primary-dim transition-all">ログイン</a>
+<a href="register.html" class="px-4 md:px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block text-sm md:text-base">会員登録</a>
+</div>
+</nav>
+<div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-lg shadow-lg border-t border-outline-variant/20">
+<div class="flex flex-col py-4 px-6 gap-1">
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="jobs.html">お仕事を探す</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="index.html">マイリモとは</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="faq.html">FAQ/流れ</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="columns.html">コラム</a>
+<a class="py-3 px-4 rounded-xl text-primary font-bold hover:bg-surface-container-low" href="login.html">ログイン</a>
+</div>
+</div>
+</header>
+
+<main class="pt-32 pb-24 px-4 sm:px-8 max-w-4xl mx-auto">
+<!-- Breadcrumb -->
+<nav class="mb-8 flex items-center gap-2 text-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="jobs.html">求人一覧</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="recruit.html">求人詳細</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="font-medium text-on-surface">応募フォーム</span>
+</nav>
+
+<!-- Page Header -->
+<div class="mb-10">
+<h1 class="text-3xl md:text-4xl font-headline font-extrabold text-on-surface mb-4">応募フォーム</h1>
+<p class="text-secondary leading-relaxed">以下の項目をご入力のうえ、送信してください。<br class="hidden sm:block"/>ご応募後、担当コンサルタントより1〜2営業日以内にご連絡いたします。</p>
+</div>
+
+<!-- Login Autofill Banner (shown when ?logged_in=1) -->
+<div id="autofill-banner" class="hidden mb-8 p-5 rounded-2xl bg-primary/5 border border-primary/20 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5 flex-shrink-0" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface mb-1">ログイン中 — 基本情報を自動入力しました</p>
+<p class="text-sm text-on-surface-variant">お名前・メール・電話番号は会員情報から読み込んでいます。変更がある場合は上書きしてください。</p>
+</div>
+</div>
+
+<!-- Not-logged-in Prompt (shown when no ?logged_in=1) -->
+<div id="login-prompt" class="hidden mb-8 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/20 flex flex-col sm:flex-row sm:items-center gap-4">
+<span class="material-symbols-outlined text-primary flex-shrink-0">info</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface mb-1">会員の方はログインで自動入力</p>
+<p class="text-sm text-on-surface-variant">ログインすると、氏名・メール・電話が自動で入力されます。</p>
+</div>
+<a href="login.html" class="px-5 py-2.5 rounded-xl bg-primary text-on-primary font-bold text-sm whitespace-nowrap shadow-sm hover:opacity-90 transition-all">ログイン</a>
+</div>
+
+<!-- Job Summary Card -->
+<div class="mb-10 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/10 flex flex-col sm:flex-row sm:items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">work</span>
+</div>
+<div class="flex-1">
+<p class="text-xs text-on-surface-variant mb-1">応募先求人</p>
+<p class="font-bold text-on-surface">SaaSプロダクトのカスタマーサクセス・プロジェクト管理支援</p>
+<p class="text-sm text-secondary mt-1">¥2,800/hour &middot; フルリモート &middot; 週3〜4日</p>
+</div>
+<div class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-xs font-mono self-start">
+MR-98421
+</div>
+</div>
+
+<!-- Application Flow Steps -->
+<div class="mb-12 flex items-center justify-between max-w-lg mx-auto">
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">1</div>
+<span class="text-xs font-medium text-primary">入力</span>
+</div>
+<div class="flex-1 h-0.5 bg-outline-variant/30 mx-2"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-sm">2</div>
+<span class="text-xs font-medium text-on-surface-variant">確認</span>
+</div>
+<div class="flex-1 h-0.5 bg-outline-variant/30 mx-2"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-sm">3</div>
+<span class="text-xs font-medium text-on-surface-variant">完了</span>
+</div>
+</div>
+
+<!-- Application Form -->
+<form id="apply-form" class="space-y-10">
+<!-- Section: Basic Info -->
+<section>
+<h2 class="text-xl font-headline font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="w-1.5 h-7 bg-primary rounded-full"></span>
+基本情報
+</h2>
+<div class="space-y-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="last-name">
+姓 <span class="text-error text-xs ml-1">必須</span>
+</label>
+<input class="w-full px-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-on-surface-variant/50" id="last-name" name="last_name" placeholder="山田" type="text" required/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="first-name">
+名 <span class="text-error text-xs ml-1">必須</span>
+</label>
+<input class="w-full px-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-on-surface-variant/50" id="first-name" name="first_name" placeholder="花子" type="text" required/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="email">
+メールアドレス <span class="text-error text-xs ml-1">必須</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">mail</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-on-surface-variant/50" id="email" name="email" placeholder="example@email.com" type="email" required/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="phone">
+電話番号 <span class="text-error text-xs ml-1">必須</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">phone</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-on-surface-variant/50" id="phone" name="phone" placeholder="090-1234-5678" type="tel" required/>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Section: Work Info -->
+<section>
+<h2 class="text-xl font-headline font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="w-1.5 h-7 bg-tertiary rounded-full"></span>
+ご経験・ご希望
+</h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="work-status">
+現在のご状況 <span class="text-error text-xs ml-1">必須</span>
+</label>
+<select class="w-full px-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface" id="work-status" name="work_status" required>
+<option value="" disabled selected>選択してください</option>
+<option value="freelance">フリーランス</option>
+<option value="employed">会社員（転職検討中）</option>
+<option value="employed-side">会社員（副業希望）</option>
+<option value="between">離職中</option>
+<option value="other">その他</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="start-date">
+稼働開始可能時期 <span class="text-error text-xs ml-1">必須</span>
+</label>
+<select class="w-full px-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface" id="start-date" name="start_date" required>
+<option value="" disabled selected>選択してください</option>
+<option value="immediately">即日</option>
+<option value="within-2weeks">2週間以内</option>
+<option value="within-1month">1ヶ月以内</option>
+<option value="within-2months">2ヶ月以内</option>
+<option value="undecided">未定・相談したい</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="experience">
+関連するご経験・スキル <span class="text-error text-xs ml-1">必須</span>
+</label>
+<textarea class="w-full px-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-on-surface-variant/50 resize-none" id="experience" name="experience" rows="4" placeholder="例: IT企業でカスタマーサクセス3年、SaaS導入支援の経験あり。Slack, Notion, Salesforce等を業務で使用。" required></textarea>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="message">
+自己PR・ご質問など <span class="text-on-surface-variant text-xs ml-1">任意</span>
+</label>
+<textarea class="w-full px-4 py-3.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface placeholder:text-on-surface-variant/50 resize-none" id="message" name="message" rows="3" placeholder="応募の動機や、事前にご質問があればお書きください。"></textarea>
+</div>
+</div>
+</section>
+
+<!-- Section: Resume Upload -->
+<section>
+<h2 class="text-xl font-headline font-bold text-on-surface mb-6 flex items-center gap-3">
+<span class="w-1.5 h-7 bg-primary rounded-full"></span>
+履歴書・職務経歴書
+</h2>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1">
+ファイルアップロード <span class="text-on-surface-variant text-xs ml-1">任意</span>
+</label>
+<div class="relative border-2 border-dashed border-outline-variant/40 rounded-2xl p-8 text-center hover:border-primary/40 transition-colors cursor-pointer" id="drop-zone">
+<input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" type="file" name="resume" id="resume" accept=".pdf,.doc,.docx"/>
+<span class="material-symbols-outlined text-4xl text-outline mb-3 block">upload_file</span>
+<p class="text-sm font-medium text-on-surface-variant">クリックまたはドラッグ&ドロップでアップロード</p>
+<p class="text-xs text-outline mt-2">PDF, Word形式（最大10MB）</p>
+<p id="file-name" class="text-sm font-medium text-primary mt-3 hidden"></p>
+</div>
+</div>
+</section>
+
+<!-- Agreement -->
+<section class="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/10">
+<div class="flex items-start gap-3">
+<input class="w-5 h-5 mt-0.5 rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface-container flex-shrink-0" id="agree" name="agree" type="checkbox" required/>
+<label class="text-sm text-on-surface-variant leading-relaxed" for="agree">
+<a href="#" class="text-primary hover:underline font-medium">利用規約</a>および<a href="#" class="text-primary hover:underline font-medium">プライバシーポリシー</a>に同意のうえ、応募します。
+</label>
+</div>
+</section>
+
+<!-- Submit -->
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<a href="recruit.html" class="flex-1 py-4 rounded-2xl bg-surface-container-high text-on-surface-variant font-bold text-center hover:bg-surface-container-highest transition-all active:scale-95">
+戻る
+</a>
+<button type="submit" class="flex-[2] py-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span>この内容で応募する</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</form>
+
+<!-- Flow Note -->
+<div class="mt-12 p-6 rounded-2xl bg-surface-container border border-outline-variant/10">
+<h3 class="font-bold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">info</span>
+応募後の流れ
+</h3>
+<ol class="text-sm text-on-surface-variant leading-relaxed space-y-2 pl-6 list-decimal">
+<li>担当コンサルタントより<strong class="text-on-surface">1〜2営業日以内</strong>にメールまたはお電話でご連絡</li>
+<li>オンライン面談の日程を調整（所要約30分）</li>
+<li>面談後、企業との顔合わせ日程を設定</li>
+<li>条件合意後、お仕事スタート</li>
+</ol>
+</div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full pt-16 pb-8 bg-slate-50">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="text-xl font-bold text-slate-800 mb-6">MyRemo (マイリモ)</div>
+<p class="text-slate-500 font-plus-jakarta text-sm leading-relaxed">
+リモートワークに特化したジョブマッチングプラットフォーム。あなたのライフスタイルに合わせた自由な働き方を提案します。
+</p>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-6">サービス</h4>
+<div class="flex flex-col gap-4">
+<a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="jobs.html">お仕事を探す</a>
+<a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="index.html">マイリモとは</a>
+<a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="columns.html">コラム</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-6">サポート</h4>
+<div class="flex flex-col gap-4">
+<a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="faq.html">FAQ/流れ</a>
+<a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="#">お問い合わせ</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 mb-6">規約・ポリシー</h4>
+<div class="flex flex-col gap-4">
+<a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="#">プライバシーポリシー</a>
+<a class="text-slate-500 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="#">利用規約</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-slate-200 text-center text-slate-400 font-plus-jakarta text-sm">
+&copy; 2024 MyRemo. All rights reserved.
+</div>
+</footer>
+
+<script>
+// File upload display
+const fileInput = document.getElementById('resume');
+const fileName = document.getElementById('file-name');
+fileInput.addEventListener('change', function() {
+  if (this.files.length > 0) {
+    fileName.textContent = this.files[0].name;
+    fileName.classList.remove('hidden');
+  } else {
+    fileName.classList.add('hidden');
+  }
+});
+
+// Login autofill (simulated): reads ?logged_in=1 or sessionStorage and prefills the basic info section
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  let loggedIn = params.get('logged_in') === '1';
+  try { if (sessionStorage.getItem('loggedIn') === '1') loggedIn = true; } catch (err) {}
+  const banner = document.getElementById('autofill-banner');
+  const prompt = document.getElementById('login-prompt');
+
+  if (loggedIn) {
+    banner.classList.remove('hidden');
+    // デモ用のダミー会員データ（本番はサーバーサイドでセッションから注入）
+    const profile = {
+      last_name: '山田',
+      first_name: '花子',
+      email: 'hanako.yamada@example.com',
+      phone: '090-1234-5678'
+    };
+    Object.entries(profile).forEach(([name, value]) => {
+      const el = document.querySelector('[name="' + name + '"]');
+      if (el) {
+        el.value = value;
+        el.readOnly = true;
+        el.classList.add('bg-surface-container', 'text-on-surface-variant');
+      }
+    });
+  } else {
+    prompt.classList.remove('hidden');
+  }
+})();
+
+// Form submission
+document.getElementById('apply-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  window.location.href = 'apply-complete.html';
+});
+</script>
+</body></html>

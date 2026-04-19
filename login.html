@@ -141,6 +141,13 @@
 <span class="material-symbols-outlined text-xl">login</span>
 </button>
 </form>
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  try { sessionStorage.setItem('loggedIn', '1'); } catch (err) {}
+  window.location.href = 'jobs.html';
+});
+</script>
 <!-- Divider -->
 <div class="relative my-10">
 <div class="absolute inset-0 flex items-center">
@@ -172,7 +179,7 @@
 <p class="text-on-surface-variant font-medium">
                 アカウントをお持ちでないですか？
             </p>
-<a class="inline-block py-2 px-6 bg-primary/5 text-primary font-bold rounded-full hover:bg-primary/10 transition-all" href="#">
+<a class="inline-block py-2 px-6 bg-primary/5 text-primary font-bold rounded-full hover:bg-primary/10 transition-all" href="register.html">
                 新規登録はこちら
             </a>
 </div>

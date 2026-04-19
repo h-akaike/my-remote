@@ -94,13 +94,25 @@
 <a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 font-manrope text-base font-medium py-2" href="jobs.html">お仕事を探す</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors font-manrope text-base font-medium py-2" href="index.html">マイリモとは</a>
 <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors font-manrope text-base font-medium py-2" href="faq.html">FAQ/流れ</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors font-manrope text-base font-medium py-2" href="column-case.html">コラム</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors font-manrope text-base font-medium py-2" href="columns.html">コラム</a>
 </div>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 md:gap-4">
+<button class="md:hidden p-2 -mr-1 text-slate-700" aria-label="メニュー" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+<span class="material-symbols-outlined">menu</span>
+</button>
 <a href="login.html" class="hidden lg:block px-5 py-2.5 text-sm font-bold text-primary hover:text-primary-dim transition-all">ログイン</a>
-<a href="login.html" class="px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block">会員登録</a>
+<a href="register.html" class="px-4 md:px-6 py-2.5 rounded-xl font-bold text-on-primary bg-gradient-to-br from-primary to-primary-container shadow-md hover:opacity-90 transition-all scale-95 active:opacity-80 inline-block text-sm md:text-base">会員登録</a>
 </div>
 </nav>
+<div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-lg shadow-lg border-t border-outline-variant/20">
+<div class="flex flex-col py-4 px-6 gap-1">
+<a class="py-3 px-4 rounded-xl text-primary font-bold bg-primary/5" href="jobs.html">お仕事を探す</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="index.html">マイリモとは</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="faq.html">FAQ/流れ</a>
+<a class="py-3 px-4 rounded-xl text-on-surface font-medium hover:bg-surface-container-low" href="columns.html">コラム</a>
+<a class="py-3 px-4 rounded-xl text-primary font-bold hover:bg-surface-container-low" href="login.html">ログイン</a>
+</div>
+</div>
 </header>
 <main class="pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
 <!-- Breadcrumb & Job ID -->
@@ -284,13 +296,10 @@
 <div class="sticky top-28 space-y-6">
 <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-outline-variant/10">
 <div class="space-y-4">
-<button class="w-full py-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95">
+<a href="apply.html" class="w-full py-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 block text-center">
                                 応募する
-                            </button>
-<button class="w-full py-4 rounded-2xl bg-surface-container-high text-primary font-bold flex items-center justify-center gap-2 hover:bg-surface-container-highest transition-all active:scale-95">
-<img alt="LINE" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuGyY1xn54f7DjE7vWL4yc3CtOmpIV0urAl2USIZRFtZL5MpXJ4JuAJVBk33Hrrj4NlDlUKA-tWOSznarnLVlfAsDK6GyP3kVRAWzBmiSLQMNV-5qatU4qFdrNmZONST1gUMEghW2WxyWy4lYTy7p0GRGAmP9tjTEqCBP_nYke3Z-0iNdM4BUXwnak_qxyzu3uRbhZwo2WX_IzBVfa18cw6QXrUJMGXBhTWYXO97pgh3DJHteGisG51TRVy3mI5GgCC13D6Atojk8"/>
-                                LINEで相談する
-                            </button>
+                            </a>
+<p class="text-xs text-on-surface-variant text-center">ログインすると、氏名・連絡先が自動で入力されます</p>
 </div>
 <div class="mt-8 pt-6 border-t border-outline-variant/10">
 <div class="flex items-center gap-4 text-sm text-on-surface-variant">
@@ -324,7 +333,10 @@
 <h2 class="text-display-lg font-headline font-bold text-white mb-4">最適な働き方を見つけよう</h2>
 <p class="text-body-lg opacity-80">自分に合った条件の求人が見つからない場合は、コンサルタントによる個別相談も承っております。</p>
 </div>
-<button class="px-8 py-5 rounded-full bg-white text-on-surface font-black text-xl hover:bg-primary-container transition-all">無料で相談予約</button>
+<a href="#" class="px-8 py-5 rounded-full bg-white text-on-surface font-black text-xl hover:bg-primary-container transition-all inline-flex items-center gap-2">
+<span class="material-symbols-outlined">chat</span>
+LINEで新着求人を受け取る
+</a>
 </div>
 </section>
 </main>
@@ -342,7 +354,7 @@
 <div class="flex flex-col gap-4">
 <a class="text-slate-500 dark:text-slate-400 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="jobs.html">お仕事を探す</a>
 <a class="text-slate-500 dark:text-slate-400 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="index.html">マイリモとは</a>
-<a class="text-slate-500 dark:text-slate-400 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="column-case.html">コラム</a>
+<a class="text-slate-500 dark:text-slate-400 hover:underline decoration-blue-500 underline-offset-4 font-plus-jakarta text-sm" href="columns.html">コラム</a>
 </div>
 </div>
 <div>
@@ -366,12 +378,9 @@
 </footer>
 <!-- Mobile CTA Bar (Fixed Bottom) -->
 <div class="md:hidden fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-lg border-t border-outline-variant/10 p-4 z-50 flex gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
-<button class="flex-1 py-4 rounded-xl bg-surface-container-high text-primary font-bold text-sm flex items-center justify-center gap-2">
-<img alt="LINE" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHkqetKCjeFfs52h7uJdDyNyOk6l8SnsqSJ74TJKzoMJfYqKG1UQ1jIeuvKkMuJ_ID3QskyCS1-7aGEKJnTQHOGLHeMJ2LJYGtFXexQVfts_kZNUzDV0ZFxfJG7VlhS9UQttDElymjjdeLiqORa80vnIJOSYHes4vD1kRoBrGXBYgRIlf4-Lo3clI_s39KHlmg4ChNsOh1ZYuAMiC53n_QfduI8RH1dv-t4i14LgYLaOc-mgqNmZ4Hm8spYz81BoGRUq2-awl87ks"/>
-            LINE相談
-        </button>
-<button class="flex-[2] py-4 rounded-xl bg-primary text-on-primary font-bold text-sm shadow-md">
-            応募する
-        </button>
+<a href="apply.html" class="flex-1 py-4 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-md text-center flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl">send</span>
+この求人に応募する
+</a>
 </div>
 </body></html>

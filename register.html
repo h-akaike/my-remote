@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<title>会員登録 - MyRemo (マイリモ)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#11639e",
+              "primary-dim": "#00568e",
+              "primary-container": "#7cbbfc",
+              "on-primary": "#f7f9ff",
+              "on-primary-container": "#00375d",
+              "secondary": "#4b6274",
+              "on-surface": "#2c3437",
+              "on-surface-variant": "#596064",
+              "surface": "#f7f9fb",
+              "surface-container": "#eaeff2",
+              "surface-container-low": "#f0f4f7",
+              "surface-container-high": "#e3e9ed",
+              "surface-container-highest": "#dce4e8",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#747c80",
+              "outline-variant": "#acb3b7",
+              "error": "#a83836",
+              "tertiary": "#635983"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .primary-gradient { background: linear-gradient(135deg, #11639e 0%, #7cbbfc 100%); }
+</style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Background -->
+<div class="fixed inset-0 z-0">
+<img alt="" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvLwJl0Vrl2_GZvNMYUfvW_gwVQHumAMeHQkQ6BQAFRU8KPdICYB62i7s7PY_GBEZj9QfJ8BXKPf81tAls6wdL2oRuuGI6YnapgJrYMZm1AIf0ZtgDBT3_1g4lkoUYa8ocmyTru77y7ppRaorffVqpyuy0S5pTOk1xdDZ-VDkXYbpvpI7Usgl99hi_NUe9XHDCfImVGRoVguoWVKAxXbQWCIDAF1BmKMleGlK8jrpEhvFjKu7KeZKXLEeaGJYcOWfj5j-59kx8ABE"/>
+<div class="absolute inset-0 bg-surface/60 backdrop-blur-[2px]"></div>
+</div>
+
+<main class="relative z-10 w-full max-w-[520px] mt-8 mb-8">
+<div class="text-center mb-10">
+<a href="index.html"><h1 class="font-headline text-4xl font-extrabold tracking-tight text-primary mb-2">
+MyRemo <span class="text-lg font-medium opacity-80">(マイリモ)</span>
+</h1></a>
+<p class="text-secondary font-medium tracking-wide">30秒で、あなたに合う在宅ワークへ。</p>
+</div>
+
+<div class="bg-surface-container-lowest rounded-3xl p-8 md:p-10 shadow-[0_20px_40px_rgba(44,52,55,0.06)] ring-1 ring-outline-variant/15">
+<h2 class="text-2xl font-headline font-bold text-on-surface mb-2 text-center">会員登録</h2>
+<p class="text-sm text-on-surface-variant text-center mb-8">基本情報のみで登録完了。応募は後からでもOKです。</p>
+
+<form class="space-y-5" id="register-form">
+<!-- Name -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="last-name">姓 <span class="text-error text-xs ml-1">必須</span></label>
+<input class="w-full px-4 py-3.5 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="last-name" name="last_name" placeholder="山田" type="text" required/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="first-name">名 <span class="text-error text-xs ml-1">必須</span></label>
+<input class="w-full px-4 py-3.5 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="first-name" name="first_name" placeholder="花子" type="text" required/>
+</div>
+</div>
+
+<!-- Email -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="email">メールアドレス <span class="text-error text-xs ml-1">必須</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">mail</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="email" name="email" placeholder="example@myremo.jp" type="email" required/>
+</div>
+</div>
+
+<!-- Phone -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="phone">電話番号 <span class="text-error text-xs ml-1">必須</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">phone</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="phone" name="phone" placeholder="090-1234-5678" type="tel" required/>
+</div>
+</div>
+
+<!-- Birth Date -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="birthdate">生年月日 <span class="text-error text-xs ml-1">必須</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">calendar_today</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface" id="birthdate" name="birthdate" type="date" required/>
+</div>
+</div>
+
+<!-- Password -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-secondary px-1" for="password">パスワード <span class="text-error text-xs ml-1">必須</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="password" name="password" placeholder="8文字以上" type="password" minlength="8" required/>
+</div>
+</div>
+
+<!-- Agreement -->
+<div class="flex items-start gap-3 pt-2">
+<input class="w-5 h-5 mt-0.5 rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface-container flex-shrink-0" id="agree" name="agree" type="checkbox" required/>
+<label class="text-sm text-on-surface-variant leading-relaxed" for="agree">
+<a class="text-primary hover:underline font-medium" href="#">利用規約</a>および<a class="text-primary hover:underline font-medium" href="#">プライバシーポリシー</a>に同意する
+</label>
+</div>
+
+<!-- Submit -->
+<button class="w-full py-4 primary-gradient text-on-primary font-bold rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2" type="submit">
+<span>登録して仕事を探す</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+
+<p class="text-xs text-on-surface-variant text-center pt-2">登録後に、職務経歴書・詳細な希望条件は求人応募時にご入力いただきます。</p>
+</form>
+
+<div class="mt-8 pt-6 border-t border-outline-variant/15 text-center">
+<p class="text-sm text-on-surface-variant mb-3">すでにアカウントをお持ちの方</p>
+<a class="inline-block py-2 px-6 bg-primary/5 text-primary font-bold rounded-full hover:bg-primary/10 transition-all" href="login.html">
+ログイン
+</a>
+</div>
+</div>
+</main>
+
+<footer class="relative z-10 w-full max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-on-surface-variant text-xs font-medium space-y-4 md:space-y-0">
+<div class="flex space-x-6">
+<a class="hover:text-primary transition-colors" href="#">利用規約</a>
+<a class="hover:text-primary transition-colors" href="#">プライバシーポリシー</a>
+<a class="hover:text-primary transition-colors" href="#">ヘルプセンター</a>
+</div>
+<div>© 2024 MyRemo Inc. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById('register-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  try { sessionStorage.setItem('loggedIn', '1'); } catch (err) {}
+  window.location.href = 'jobs.html';
+});
+</script>
+</body></html>
