@@ -151,7 +151,7 @@
 <div class="grid grid-cols-1 gap-2">
 <label class="flex items-center gap-3 text-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
 <input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
-                                    IT・テクノロジー
+                                    IT・SaaS
                                 </label>
 <label class="flex items-center gap-3 text-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
 <input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
@@ -167,6 +167,7 @@
 <div class="space-y-4">
 <label class="block text-sm font-bold text-on-surface">働き方</label>
 <select class="w-full bg-surface-container-highest border-none rounded-lg text-sm px-4 py-3 focus:ring-2 focus:ring-primary/20">
+<option>すべて</option>
 <option>フルリモート</option>
 <option>一部出社あり</option>
 <option>業務委託</option>
@@ -189,12 +190,13 @@
 <div class="flex-grow space-y-6">
 <!-- Result Stats -->
 <div class="flex items-center justify-between mb-8 px-2">
-<span class="text-on-surface-variant font-medium">該当件数: <strong class="text-primary text-xl">128</strong> 件</span>
+<span class="text-on-surface-variant font-medium">該当件数: <strong class="text-primary text-xl" id="job-count">-</strong> 件</span>
 <div class="flex items-center gap-2 text-sm font-bold text-secondary">
 <span>新着順</span>
 <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
 </div>
 </div>
+<div id="job-list" class="space-y-6">
 <!-- Job Card 1 -->
 <div class="group bg-surface-container-lowest p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/10">
 <div class="flex flex-col md:flex-row gap-6">
@@ -332,8 +334,9 @@
 </div>
 </div>
 </div>
+</div>
 <!-- Pagination -->
-<div class="flex justify-center items-center gap-2 pt-12">
+<div class="hidden justify-center items-center gap-2 pt-12" id="job-pagination">
 <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-high text-on-surface hover:bg-primary hover:text-white transition-all">
 <span class="material-symbols-outlined">chevron_left</span>
 </button>
@@ -392,4 +395,147 @@
         </div>
 </footer>
 <!-- FAB (Suppressed based on context: Focus is the job list, but for dashboard-like exploration it can be shown. Here suppressed as it's a details/list focus page) -->
+<script>
+const WP_API_BASE = 'https://enn-musubi.sakura.ne.jp/my-remote/wp-json/wp/v2';
+const FALLBACK_JOB_IMAGE = 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80';
+
+const textFromHtml = (html = '') => {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.content.textContent.trim();
+};
+
+const jobTerms = (job, taxonomy) => {
+  const groups = job._embedded?.['wp:term'] || [];
+  return groups
+    .flat()
+    .filter((term) => term.taxonomy === taxonomy)
+    .map((term) => term.name);
+};
+
+const metaValue = (job, key, fallback = '') => job.meta?.[key] || fallback;
+
+const renderJobCard = (job) => {
+  const title = textFromHtml(job.title?.rendered);
+  const excerpt = textFromHtml(job.excerpt?.rendered);
+  const types = jobTerms(job, 'job_type');
+  const industries = jobTerms(job, 'job_industry');
+  const styles = jobTerms(job, 'work_style');
+  const label = metaValue(job, 'featured_label', metaValue(job, 'experience_level'));
+  const imageUrl = metaValue(job, 'image_url', FALLBACK_JOB_IMAGE);
+  const detailUrl = `recruit.html?job=${encodeURIComponent(job.slug)}`;
+
+  return `
+    <div class="group bg-surface-container-lowest p-6 md:p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/10">
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="w-full md:w-32 h-32 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden">
+          <img class="w-full h-full object-cover" alt="${title}" src="${imageUrl}">
+        </div>
+        <div class="flex-grow space-y-4">
+          <div class="flex flex-wrap items-center gap-3">
+            ${label ? `<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-xs font-bold rounded-full">${label}</span>` : ''}
+            <span class="text-sm font-bold text-primary">${[industries[0], types[0]].filter(Boolean).join(' / ')}</span>
+          </div>
+          <h2 class="text-2xl font-bold font-headline text-on-surface leading-tight">${title}</h2>
+          <p class="text-on-surface-variant text-sm line-clamp-2">${excerpt}</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-widest text-outline font-bold">Hourly Rate</span>
+              <p class="text-sm font-bold text-on-surface">${metaValue(job, 'hourly_rate', '応相談')}</p>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-widest text-outline font-bold">Work Style</span>
+              <p class="text-sm font-bold text-on-surface">${styles[0] || metaValue(job, 'location', 'リモート')}</p>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-widest text-outline font-bold">Contract</span>
+              <p class="text-sm font-bold text-on-surface">${metaValue(job, 'employment_type', '応相談')}</p>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-widest text-outline font-bold">Min. Hours</span>
+              <p class="text-sm font-bold text-on-surface">${metaValue(job, 'work_hours', '応相談')}</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between items-end gap-4 min-w-[140px]">
+          <div class="text-right">
+            <span class="inline-block px-4 py-1.5 bg-primary/5 text-primary text-xs font-bold rounded-lg mb-2">${metaValue(job, 'experience_level', '募集中')}</span>
+          </div>
+          <a href="${detailUrl}" class="w-full py-3 px-6 bg-surface-container-high text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all inline-block text-center">詳細を見る</a>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
+const selectedFilters = () => {
+  const selects = document.querySelectorAll('aside select');
+  const checkboxes = Array.from(document.querySelectorAll('aside input[type="checkbox"]'));
+  const industryChecks = checkboxes.slice(0, 3);
+
+  return {
+    type: selects[0]?.value || 'すべて',
+    industries: industryChecks
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.closest('label')?.textContent.trim())
+      .filter(Boolean),
+    style: selects[1]?.value || 'すべて',
+    beginner: Boolean(checkboxes[3]?.checked),
+  };
+};
+
+const matchesFilters = (job, filters) => {
+  const types = jobTerms(job, 'job_type');
+  const industries = jobTerms(job, 'job_industry');
+  const styles = jobTerms(job, 'work_style');
+
+  const typeOk = filters.type === 'すべて' || types.includes(filters.type);
+  const industryOk = filters.industries.length === 0 || filters.industries.some((industry) => industries.includes(industry));
+  const styleOk = filters.style === 'すべて' || styles.includes(filters.style) || metaValue(job, 'employment_type') === filters.style;
+  const beginnerOk = !filters.beginner || metaValue(job, 'experience_level').includes('未経験');
+
+  return typeOk && industryOk && styleOk && beginnerOk;
+};
+
+let allJobs = [];
+
+const renderJobs = () => {
+  const list = document.getElementById('job-list');
+  const count = document.getElementById('job-count');
+  const jobs = allJobs.filter((job) => matchesFilters(job, selectedFilters()));
+
+  count.textContent = jobs.length;
+  list.innerHTML = jobs.length
+    ? jobs.map(renderJobCard).join('')
+    : '<div class="bg-surface-container-lowest p-8 rounded-xl text-on-surface-variant">条件に合う求人はありません。</div>';
+};
+
+const loadJobs = async () => {
+  const list = document.getElementById('job-list');
+  list.innerHTML = '<div class="bg-surface-container-lowest p-8 rounded-xl text-on-surface-variant">求人を読み込んでいます...</div>';
+
+  try {
+    const response = await fetch(`${WP_API_BASE}/jobs?per_page=20&_embed=1`);
+    if (!response.ok) throw new Error(`WordPress API error: ${response.status}`);
+    allJobs = await response.json();
+    renderJobs();
+  } catch (error) {
+    console.error(error);
+    document.getElementById('job-count').textContent = '0';
+    list.innerHTML = '<div class="bg-surface-container-lowest p-8 rounded-xl text-error">求人を読み込めませんでした。時間をおいて再度お試しください。</div>';
+  }
+};
+
+document.querySelector('aside form')?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  event.currentTarget.reset();
+  renderJobs();
+});
+
+document.querySelectorAll('aside select, aside input[type="checkbox"]').forEach((input) => {
+  input.addEventListener('change', renderJobs);
+});
+
+loadJobs();
+</script>
 </body></html>
