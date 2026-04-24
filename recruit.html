@@ -447,7 +447,7 @@ const loadJobDetail = async () => {
     }
 
     const typeLabel = [industries[0], types[0]].filter(Boolean).join(' / ');
-    const companyCard = document.querySelector('.bg-surface-container-low p.font-bold, .bg-surface-container-low .font-bold');
+    const companyCard = document.querySelector('.bg-surface-container-low.p-6.rounded-3xl .font-bold');
     if (companyCard) companyCard.textContent = metaValue(job, 'company_name', typeLabel || 'MyRemo掲載求人');
   } catch (error) {
     console.error(error);
