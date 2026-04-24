@@ -424,10 +424,9 @@ applyForm.addEventListener('submit', async function(e) {
   submitButton.disabled = true;
   submitButton.classList.add('opacity-70');
 
-  const formData = new FormData(applyForm);
-  const payload = Object.fromEntries(formData.entries());
-  payload.job_title = document.querySelector('.mb-10 .font-bold.text-on-surface')?.textContent?.trim() || 'MyRemo掲載求人';
-  payload.job_slug = new URLSearchParams(window.location.search).get('job') || 'MR-98421';
+  const payload = new FormData(applyForm);
+  payload.set('job_title', document.querySelector('.mb-10 .font-bold.text-on-surface')?.textContent?.trim() || 'MyRemo掲載求人');
+  payload.set('job_slug', new URLSearchParams(window.location.search).get('job') || 'MR-98421');
 
   try {
     await window.myremoteAuth.createApplication(payload);

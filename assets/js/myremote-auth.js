@@ -27,8 +27,9 @@
 
   async function request(path, options) {
     const token = getToken();
+    const isFormData = options && options.body instanceof FormData;
     const headers = {
-      'Content-Type': 'application/json',
+      ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
       ...(options && options.headers ? options.headers : {}),
     };
 
@@ -48,6 +49,51 @@
     }
 
     return data;
+  }
+
+  function storedUser() {
+    try {
+      return JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function enhanceHeader() {
+    if (!getToken()) return;
+
+    const loginLinks = document.querySelectorAll('a[href="login.html"], a[href="/login"], a[href$="/login"]');
+    loginLinks.forEach((link) => {
+      link.href = 'mypage.html';
+      link.textContent = 'マイページ';
+    });
+
+    const registerLinks = document.querySelectorAll('a[href="register.html"], a[href="/register"], a[href$="/register"]');
+    registerLinks.forEach((link) => {
+      link.href = '#logout';
+      link.textContent = 'ログアウト';
+      link.addEventListener('click', async (event) => {
+        event.preventDefault();
+        await window.myremoteAuth.logout();
+        window.location.href = 'login.html';
+      });
+    });
+  }
+
+  function rewriteStaticLinks() {
+    const labelToHref = {
+      'お問い合わせ': 'contact.html',
+      '利用規約': 'terms.html',
+      'プライバシーポリシー': 'privacy.html',
+      'ヘルプセンター': 'faq.html',
+    };
+
+    document.querySelectorAll('a[href="#"]').forEach((link) => {
+      const label = link.textContent.trim();
+      if (labelToHref[label]) {
+        link.href = labelToHref[label];
+      }
+    });
   }
 
   window.myremoteAuth = {
@@ -84,11 +130,43 @@
         clearSession();
       }
     },
+    async passwordReset(email) {
+      return request('/password-reset', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+      });
+    },
+    async contact(payload) {
+      return request('/contact', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+    },
     async createApplication(payload) {
+      if (payload instanceof FormData) {
+        return request('/applications', {
+          method: 'POST',
+          body: payload,
+        });
+      }
+
       return request('/applications', {
         method: 'POST',
         body: JSON.stringify(payload),
       });
     },
+    storedUser,
+    enhanceHeader,
+    rewriteStaticLinks,
   };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      rewriteStaticLinks();
+      enhanceHeader();
+    });
+  } else {
+    rewriteStaticLinks();
+    enhanceHeader();
+  }
 })();

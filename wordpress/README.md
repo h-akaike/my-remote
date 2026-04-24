@@ -14,8 +14,10 @@ WordPressはCMSとして使い、フロントエンドはNetlify側からREST AP
 
 - `POST /wp-json/myremote/v1/register`: 会員登録
 - `POST /wp-json/myremote/v1/login`: ログイン
+- `POST /wp-json/myremote/v1/password-reset`: パスワード再設定メール送信
 - `GET /wp-json/myremote/v1/me`: ログイン中ユーザー取得
-- `POST /wp-json/myremote/v1/applications`: 応募作成
+- `POST /wp-json/myremote/v1/applications`: 応募作成、履歴書アップロード、応募者/管理者への通知メール
+- `POST /wp-json/myremote/v1/contact`: お問い合わせ送信
 
 Netlify側は `assets/js/myremote-auth.js` からBearerトークンでこれらのAPIを呼び出します。
 

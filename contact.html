@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<title>お問い合わせ - MyRemo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-[#f7f9fb] text-[#2c3437]" style="font-family:'Plus Jakarta Sans',sans-serif">
+<header class="h-20 bg-white/85 backdrop-blur border-b border-slate-200">
+<nav class="max-w-5xl mx-auto h-full px-6 flex items-center justify-between">
+<a href="index.html" class="text-2xl font-extrabold text-[#11639e]" style="font-family:Manrope,sans-serif">MyRemo</a>
+<div class="flex gap-5 text-sm font-semibold"><a href="jobs.html">お仕事を探す</a><a href="faq.html">FAQ</a><a href="login.html">ログイン</a></div>
+</nav>
+</header>
+<main class="max-w-2xl mx-auto px-6 py-16">
+<h1 class="text-4xl font-extrabold mb-4" style="font-family:Manrope,sans-serif">お問い合わせ</h1>
+<p class="text-[#596064] mb-8">求人や応募についてのご相談はこちらからお送りください。</p>
+<div id="message" class="hidden mb-6 rounded-xl px-4 py-3 text-sm font-medium"></div>
+<form id="contact-form" class="bg-white rounded-2xl p-8 shadow-sm space-y-5">
+<div><label class="block text-sm font-bold mb-2" for="name">お名前</label><input id="name" name="name" required class="w-full rounded-xl border-slate-200 px-4 py-3"/></div>
+<div><label class="block text-sm font-bold mb-2" for="email">メールアドレス</label><input id="email" name="email" type="email" required class="w-full rounded-xl border-slate-200 px-4 py-3"/></div>
+<div><label class="block text-sm font-bold mb-2" for="body">お問い合わせ内容</label><textarea id="body" name="message" rows="6" required class="w-full rounded-xl border-slate-200 px-4 py-3"></textarea></div>
+<button type="submit" class="w-full py-4 rounded-xl bg-[#11639e] text-white font-bold">送信する</button>
+</form>
+</main>
+<script src="assets/js/myremote-auth.js"></script>
+<script>
+const form = document.getElementById('contact-form');
+const message = document.getElementById('message');
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const button = form.querySelector('button');
+  button.disabled = true;
+  try {
+    await window.myremoteAuth.contact(Object.fromEntries(new FormData(form).entries()));
+    message.textContent = 'お問い合わせを送信しました。';
+    message.className = 'mb-6 rounded-xl px-4 py-3 text-sm font-medium bg-[#11639e]/10 text-[#11639e]';
+    form.reset();
+  } catch (error) {
+    message.textContent = error.message;
+    message.className = 'mb-6 rounded-xl px-4 py-3 text-sm font-medium bg-red-50 text-red-700';
+  } finally {
+    button.disabled = false;
+  }
+});
+</script>
+</body></html>

@@ -110,6 +110,8 @@ add_action('init', function () {
         'user_id',
         'job_slug',
         'job_title',
+        'resume_attachment_id',
+        'resume_url',
         'status',
         'last_name',
         'first_name',
@@ -147,6 +149,18 @@ add_action('rest_api_init', function () {
         'permission_callback' => '__return_true',
     ]);
 
+    register_rest_route('myremote/v1', '/password-reset', [
+        'methods' => 'POST',
+        'callback' => 'myremote_rest_password_reset',
+        'permission_callback' => '__return_true',
+    ]);
+
+    register_rest_route('myremote/v1', '/contact', [
+        'methods' => 'POST',
+        'callback' => 'myremote_rest_contact',
+        'permission_callback' => '__return_true',
+    ]);
+
     register_rest_route('myremote/v1', '/logout', [
         'methods' => 'POST',
         'callback' => 'myremote_rest_logout',
@@ -179,6 +193,40 @@ add_action('rest_api_init', function () {
         ],
     ]);
 });
+
+add_filter('manage_application_posts_columns', function (array $columns): array {
+    $columns['applicant'] = '応募者';
+    $columns['job_title'] = '求人';
+    $columns['status'] = 'ステータス';
+    $columns['resume'] = '履歴書';
+
+    return $columns;
+});
+
+add_action('manage_application_posts_custom_column', function (string $column, int $post_id): void {
+    if ($column === 'applicant') {
+        echo esc_html(trim(
+            (string) get_post_meta($post_id, 'last_name', true) . ' ' .
+            (string) get_post_meta($post_id, 'first_name', true)
+        ));
+        echo '<br><small>' . esc_html((string) get_post_meta($post_id, 'email', true)) . '</small>';
+    }
+
+    if ($column === 'job_title') {
+        echo esc_html((string) get_post_meta($post_id, 'job_title', true));
+    }
+
+    if ($column === 'status') {
+        echo esc_html((string) get_post_meta($post_id, 'status', true) ?: 'new');
+    }
+
+    if ($column === 'resume') {
+        $resume_url = (string) get_post_meta($post_id, 'resume_url', true);
+        if ($resume_url) {
+            echo '<a href="' . esc_url($resume_url) . '" target="_blank" rel="noopener">開く</a>';
+        }
+    }
+}, 10, 2);
 
 function myremote_request_data(WP_REST_Request $request): array
 {
@@ -327,6 +375,64 @@ function myremote_rest_login(WP_REST_Request $request)
     return myremote_auth_response($user, $remember);
 }
 
+function myremote_rest_password_reset(WP_REST_Request $request)
+{
+    $data = myremote_request_data($request);
+    $email = myremote_email_param($data);
+
+    if (!is_email($email)) {
+        return new WP_Error('myremote_invalid_email', 'メールアドレスを確認してください。', ['status' => 400]);
+    }
+
+    $user = get_user_by('email', $email);
+    if ($user) {
+        $key = get_password_reset_key($user);
+        if (is_wp_error($key)) {
+            return new WP_Error('myremote_reset_failed', 'パスワード再設定メールを送信できませんでした。', ['status' => 500]);
+        }
+
+        $reset_url = network_site_url('wp-login.php?action=rp&key=' . rawurlencode($key) . '&login=' . rawurlencode($user->user_login), 'login');
+        $sent = wp_mail(
+            $user->user_email,
+            '【MyRemo】パスワード再設定',
+            "MyRemoのパスワード再設定を受け付けました。\n\n以下のURLから新しいパスワードを設定してください。\n{$reset_url}\n\nこのメールに心当たりがない場合は破棄してください。",
+            ['Content-Type: text/plain; charset=UTF-8']
+        );
+
+        if (!$sent) {
+            return new WP_Error('myremote_reset_failed', 'パスワード再設定メールを送信できませんでした。', ['status' => 500]);
+        }
+    }
+
+    return new WP_REST_Response([
+        'ok' => true,
+        'message' => '登録済みの場合、パスワード再設定メールを送信しました。',
+    ], 200);
+}
+
+function myremote_rest_contact(WP_REST_Request $request)
+{
+    $data = myremote_request_data($request);
+    $name = myremote_param($data, 'name');
+    $email = myremote_email_param($data);
+    $message = isset($data['message']) ? sanitize_textarea_field(wp_unslash($data['message'])) : '';
+
+    if ($name === '' || !is_email($email) || $message === '') {
+        return new WP_Error('myremote_invalid_contact', 'お名前、メールアドレス、お問い合わせ内容を入力してください。', ['status' => 400]);
+    }
+
+    $subject = '【MyRemo】お問い合わせ';
+    $body = "お問い合わせが届きました。\n\nお名前: {$name}\nメール: {$email}\n\n内容:\n{$message}\n";
+    $headers = ['Reply-To: ' . $name . ' <' . $email . '>'];
+    $sent = wp_mail(get_option('admin_email'), $subject, $body, $headers);
+
+    if (!$sent) {
+        return new WP_Error('myremote_contact_failed', 'お問い合わせを送信できませんでした。', ['status' => 500]);
+    }
+
+    return new WP_REST_Response(['ok' => true], 200);
+}
+
 function myremote_rest_logout(WP_REST_Request $request)
 {
     $user = myremote_current_user_from_request($request);
@@ -386,7 +492,76 @@ function myremote_application_response(WP_Post $post): array
         'job_slug' => (string) get_post_meta($post->ID, 'job_slug', true),
         'job_title' => (string) get_post_meta($post->ID, 'job_title', true),
         'status' => (string) get_post_meta($post->ID, 'status', true),
+        'resume_url' => (string) get_post_meta($post->ID, 'resume_url', true),
     ];
+}
+
+function myremote_handle_resume_upload(WP_REST_Request $request, int $post_id)
+{
+    $files = $request->get_file_params();
+    if (empty($files['resume']) || !empty($files['resume']['error'])) {
+        return null;
+    }
+
+    $file = $files['resume'];
+    $allowed_mimes = [
+        'pdf' => 'application/pdf',
+        'doc' => 'application/msword',
+        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ];
+
+    $check = wp_check_filetype_and_ext($file['tmp_name'], $file['name'], $allowed_mimes);
+    if (empty($check['ext']) || empty($check['type'])) {
+        return new WP_Error('myremote_invalid_resume', '履歴書はPDFまたはWord形式でアップロードしてください。', ['status' => 400]);
+    }
+
+    if ((int) $file['size'] > 10 * MB_IN_BYTES) {
+        return new WP_Error('myremote_resume_too_large', '履歴書ファイルは10MB以内にしてください。', ['status' => 400]);
+    }
+
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+    require_once ABSPATH . 'wp-admin/includes/media.php';
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+
+    $attachment_id = media_handle_upload('resume', $post_id, [], [
+        'test_form' => false,
+        'mimes' => $allowed_mimes,
+    ]);
+
+    if (is_wp_error($attachment_id)) {
+        return $attachment_id;
+    }
+
+    return [
+        'id' => $attachment_id,
+        'url' => wp_get_attachment_url($attachment_id),
+    ];
+}
+
+function myremote_send_application_emails(int $post_id): void
+{
+    $email = (string) get_post_meta($post_id, 'email', true);
+    $name = trim(
+        (string) get_post_meta($post_id, 'last_name', true) . ' ' .
+        (string) get_post_meta($post_id, 'first_name', true)
+    );
+    $job_title = (string) get_post_meta($post_id, 'job_title', true);
+    $admin_email = get_option('admin_email');
+
+    if (is_email($email)) {
+        wp_mail(
+            $email,
+            '【MyRemo】ご応募を受け付けました',
+            "{$name} 様\n\nMyRemoへのご応募ありがとうございます。\n以下の求人への応募を受け付けました。\n\n求人: {$job_title}\n\n担当コンサルタントより1〜2営業日以内にご連絡いたします。\n\nMyRemo",
+            ['Content-Type: text/plain; charset=UTF-8']
+        );
+    }
+
+    if (is_email($admin_email)) {
+        $resume_url = (string) get_post_meta($post_id, 'resume_url', true);
+        $body = "新しい応募が届きました。\n\n応募ID: {$post_id}\n求人: {$job_title}\n応募者: {$name}\nメール: {$email}\n電話: " . (string) get_post_meta($post_id, 'phone', true) . "\n履歴書: " . ($resume_url ?: 'なし') . "\n\nWordPress管理画面で詳細を確認してください。";
+        wp_mail($admin_email, '【MyRemo】新しい応募が届きました', $body, ['Content-Type: text/plain; charset=UTF-8']);
+    }
 }
 
 function myremote_rest_applications(WP_REST_Request $request)
@@ -455,6 +630,21 @@ function myremote_rest_create_application(WP_REST_Request $request)
 
     foreach ($meta as $key => $value) {
         update_post_meta($post_id, $key, $value);
+    }
+
+    $resume = myremote_handle_resume_upload($request, $post_id);
+    if (is_wp_error($resume)) {
+        wp_delete_post($post_id, true);
+        return $resume;
+    }
+
+    if (is_array($resume)) {
+        update_post_meta($post_id, 'resume_attachment_id', (string) $resume['id']);
+        update_post_meta($post_id, 'resume_url', (string) $resume['url']);
+    }
+
+    if (empty($data['_skip_email'])) {
+        myremote_send_application_emails($post_id);
     }
 
     return new WP_REST_Response([

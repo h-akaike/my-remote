@@ -296,7 +296,7 @@
 <div class="sticky top-28 space-y-6">
 <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-outline-variant/10">
 <div class="space-y-4">
-<a href="apply.html" class="w-full py-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 block text-center">
+<a href="apply.html" class="js-apply-link w-full py-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-lg shadow-lg hover:shadow-primary/30 transition-all active:scale-95 block text-center">
                                 応募する
                             </a>
 <p class="text-xs text-on-surface-variant text-center">ログインすると、氏名・連絡先が自動で入力されます</p>
@@ -333,7 +333,7 @@
 <h2 class="text-display-lg font-headline font-bold text-white mb-4">最適な働き方を見つけよう</h2>
 <p class="text-body-lg opacity-80">自分に合った条件の求人が見つからない場合は、コンサルタントによる個別相談も承っております。</p>
 </div>
-<a href="#" class="px-8 py-5 rounded-full bg-white text-on-surface font-black text-xl hover:bg-primary-container transition-all inline-flex items-center gap-2">
+<a href="contact.html" class="px-8 py-5 rounded-full bg-white text-on-surface font-black text-xl hover:bg-primary-container transition-all inline-flex items-center gap-2">
 <span class="material-symbols-outlined">chat</span>
 LINEで新着求人を受け取る
 </a>
@@ -378,9 +378,82 @@ LINEで新着求人を受け取る
 </footer>
 <!-- Mobile CTA Bar (Fixed Bottom) -->
 <div class="md:hidden fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-lg border-t border-outline-variant/10 p-4 z-50 flex gap-3 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
-<a href="apply.html" class="flex-1 py-4 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-md text-center flex items-center justify-center gap-2">
+<a href="apply.html" class="js-apply-link flex-1 py-4 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold shadow-md text-center flex items-center justify-center gap-2">
 <span class="material-symbols-outlined text-xl">send</span>
 この求人に応募する
 </a>
 </div>
+<script src="assets/js/myremote-auth.js"></script>
+<script>
+const WP_API_BASE = 'https://enn-musubi.sakura.ne.jp/my-remote/wp-json/wp/v2';
+const FALLBACK_JOB_IMAGE = 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80';
+
+const textFromHtml = (html = '') => {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.content.textContent.trim();
+};
+
+const jobTerms = (job, taxonomy) => {
+  const groups = job._embedded?.['wp:term'] || [];
+  return groups.flat().filter((term) => term.taxonomy === taxonomy).map((term) => term.name);
+};
+
+const metaValue = (job, key, fallback = '') => job.meta?.[key] || fallback;
+
+const setText = (selector, value) => {
+  const node = document.querySelector(selector);
+  if (node && value) node.textContent = value;
+};
+
+const loadJobDetail = async () => {
+  const slug = new URLSearchParams(window.location.search).get('job');
+  document.querySelectorAll('.js-apply-link').forEach((link) => {
+    link.href = `apply.html${slug ? `?job=${encodeURIComponent(slug)}` : ''}`;
+  });
+
+  if (!slug) return;
+
+  try {
+    const response = await fetch(`${WP_API_BASE}/jobs?slug=${encodeURIComponent(slug)}&_embed=1`);
+    if (!response.ok) throw new Error(`WordPress API error: ${response.status}`);
+    const [job] = await response.json();
+    if (!job) throw new Error('Job not found');
+
+    const title = textFromHtml(job.title?.rendered);
+    const excerpt = textFromHtml(job.excerpt?.rendered);
+    const industries = jobTerms(job, 'job_industry');
+    const types = jobTerms(job, 'job_type');
+    const styles = jobTerms(job, 'work_style');
+    const imageUrl = metaValue(job, 'image_url', FALLBACK_JOB_IMAGE);
+
+    document.title = `${title} - MyRemo (マイリモ)`;
+    setText('h1', title);
+    setText('.font-mono', `Job ID: ${job.slug}`);
+    setText('.text-4xl.font-black.text-primary', metaValue(job, 'hourly_rate', '応相談'));
+    setText('.text-lg.font-bold.text-on-surface', metaValue(job, 'work_hours', styles[0] || 'リモート'));
+    setText('.bg-primary.text-on-primary', industries[0] || '求人');
+    setText('.bg-tertiary-container', styles[0] || metaValue(job, 'location', 'リモート'));
+    setText('.text-body-lg p', excerpt);
+    const heroImage = document.querySelector('section img');
+    if (heroImage) {
+      heroImage.src = imageUrl;
+      heroImage.alt = title;
+    }
+
+    const content = document.querySelector('.text-body-lg.text-secondary');
+    if (content && job.content?.rendered) {
+      content.innerHTML = job.content.rendered;
+    }
+
+    const typeLabel = [industries[0], types[0]].filter(Boolean).join(' / ');
+    const companyCard = document.querySelector('.bg-surface-container-low p.font-bold, .bg-surface-container-low .font-bold');
+    if (companyCard) companyCard.textContent = metaValue(job, 'company_name', typeLabel || 'MyRemo掲載求人');
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+loadJobDetail();
+</script>
 </body></html>
