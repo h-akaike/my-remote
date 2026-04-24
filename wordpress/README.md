@@ -8,6 +8,17 @@ WordPressはCMSとして使い、フロントエンドはNetlify側からREST AP
 - 求人などのコンテンツはWordPress標準エクスポートのXMLを `exports/` に保存します。
 - WordPress本体、公式プラグイン、アップロード画像、DBダンプ、認証情報はGit管理しません。
 
+## 会員・応募API
+
+会員はWordPress標準ユーザーDBに `applicant` ロールで保存し、応募は `application` カスタム投稿タイプに保存します。
+
+- `POST /wp-json/myremote/v1/register`: 会員登録
+- `POST /wp-json/myremote/v1/login`: ログイン
+- `GET /wp-json/myremote/v1/me`: ログイン中ユーザー取得
+- `POST /wp-json/myremote/v1/applications`: 応募作成
+
+Netlify側は `assets/js/myremote-auth.js` からBearerトークンでこれらのAPIを呼び出します。
+
 ## 本番への配置
 
 ```sh

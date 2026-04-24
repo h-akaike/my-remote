@@ -147,7 +147,7 @@
 <p class="font-bold text-on-surface mb-1">会員の方はログインで自動入力</p>
 <p class="text-sm text-on-surface-variant">ログインすると、氏名・メール・電話が自動で入力されます。</p>
 </div>
-<a href="login.html" class="px-5 py-2.5 rounded-xl bg-primary text-on-primary font-bold text-sm whitespace-nowrap shadow-sm hover:opacity-90 transition-all">ログイン</a>
+<a id="login-prompt-link" href="login.html" class="px-5 py-2.5 rounded-xl bg-primary text-on-primary font-bold text-sm whitespace-nowrap shadow-sm hover:opacity-90 transition-all">ログイン</a>
 </div>
 
 <!-- Job Summary Card -->
@@ -369,6 +369,7 @@ MR-98421
 </div>
 </footer>
 
+<script src="assets/js/myremote-auth.js"></script>
 <script>
 // File upload display
 const fileInput = document.getElementById('resume');
@@ -382,40 +383,62 @@ fileInput.addEventListener('change', function() {
   }
 });
 
-// Login autofill (simulated): reads ?logged_in=1 or sessionStorage and prefills the basic info section
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  let loggedIn = params.get('logged_in') === '1';
-  try { if (sessionStorage.getItem('loggedIn') === '1') loggedIn = true; } catch (err) {}
+const applyForm = document.getElementById('apply-form');
+const submitButton = applyForm.querySelector('button[type="submit"]');
+const currentUrl = window.location.pathname.split('/').pop() + window.location.search;
+document.getElementById('login-prompt-link').href = 'login.html?next=' + encodeURIComponent(currentUrl);
+
+async function hydrateProfile() {
   const banner = document.getElementById('autofill-banner');
   const prompt = document.getElementById('login-prompt');
 
-  if (loggedIn) {
+  if (!window.myremoteAuth.getToken()) {
+    prompt.classList.remove('hidden');
+    return;
+  }
+
+  try {
+    const profile = await window.myremoteAuth.me();
     banner.classList.remove('hidden');
-    // デモ用のダミー会員データ（本番はサーバーサイドでセッションから注入）
-    const profile = {
-      last_name: '山田',
-      first_name: '花子',
-      email: 'hanako.yamada@example.com',
-      phone: '090-1234-5678'
-    };
-    Object.entries(profile).forEach(([name, value]) => {
+    ['last_name', 'first_name', 'email', 'phone'].forEach((name) => {
       const el = document.querySelector('[name="' + name + '"]');
-      if (el) {
+      const value = profile[name];
+      if (el && value) {
         el.value = value;
-        el.readOnly = true;
-        el.classList.add('bg-surface-container', 'text-on-surface-variant');
       }
     });
-  } else {
+  } catch (error) {
+    window.myremoteAuth.clearSession();
     prompt.classList.remove('hidden');
   }
-})();
+}
 
 // Form submission
-document.getElementById('apply-form').addEventListener('submit', function(e) {
+applyForm.addEventListener('submit', async function(e) {
   e.preventDefault();
-  window.location.href = 'apply-complete.html';
+  if (!window.myremoteAuth.getToken()) {
+    window.location.href = 'login.html?next=' + encodeURIComponent(currentUrl);
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.classList.add('opacity-70');
+
+  const formData = new FormData(applyForm);
+  const payload = Object.fromEntries(formData.entries());
+  payload.job_title = document.querySelector('.mb-10 .font-bold.text-on-surface')?.textContent?.trim() || 'MyRemo掲載求人';
+  payload.job_slug = new URLSearchParams(window.location.search).get('job') || 'MR-98421';
+
+  try {
+    await window.myremoteAuth.createApplication(payload);
+    window.location.href = 'apply-complete.html';
+  } catch (error) {
+    alert(error.message);
+    submitButton.disabled = false;
+    submitButton.classList.remove('opacity-70');
+  }
 });
+
+hydrateProfile();
 </script>
 </body></html>

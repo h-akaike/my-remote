@@ -67,6 +67,7 @@ MyRemo <span class="text-lg font-medium opacity-80">(マイリモ)</span>
 <div class="bg-surface-container-lowest rounded-3xl p-8 md:p-10 shadow-[0_20px_40px_rgba(44,52,55,0.06)] ring-1 ring-outline-variant/15">
 <h2 class="text-2xl font-headline font-bold text-on-surface mb-2 text-center">会員登録</h2>
 <p class="text-sm text-on-surface-variant text-center mb-8">基本情報のみで登録完了。応募は後からでもOKです。</p>
+<div id="auth-message" class="hidden mb-6 rounded-xl px-4 py-3 text-sm font-medium"></div>
 
 <form class="space-y-5" id="register-form">
 <!-- Name -->
@@ -152,11 +153,34 @@ MyRemo <span class="text-lg font-medium opacity-80">(マイリモ)</span>
 <div>© 2024 MyRemo Inc. All rights reserved.</div>
 </footer>
 
+<script src="assets/js/myremote-auth.js"></script>
 <script>
-document.getElementById('register-form').addEventListener('submit', function(e) {
+const registerForm = document.getElementById('register-form');
+const authMessage = document.getElementById('auth-message');
+const registerButton = registerForm.querySelector('button[type="submit"]');
+
+function showAuthMessage(message, isError) {
+  authMessage.textContent = message;
+  authMessage.className = 'mb-6 rounded-xl px-4 py-3 text-sm font-medium ' + (isError ? 'bg-error/10 text-error' : 'bg-primary/10 text-primary');
+}
+
+registerForm.addEventListener('submit', async function(e) {
   e.preventDefault();
-  try { sessionStorage.setItem('loggedIn', '1'); } catch (err) {}
-  window.location.href = 'jobs.html';
+  registerButton.disabled = true;
+  registerButton.classList.add('opacity-70');
+  showAuthMessage('登録しています。', false);
+
+  const formData = new FormData(registerForm);
+  const payload = Object.fromEntries(formData.entries());
+
+  try {
+    await window.myremoteAuth.register(payload);
+    window.location.href = 'jobs.html';
+  } catch (error) {
+    showAuthMessage(error.message, true);
+    registerButton.disabled = false;
+    registerButton.classList.remove('opacity-70');
+  }
 });
 </script>
 </body></html>

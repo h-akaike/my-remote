@@ -110,13 +110,14 @@
 <!-- Form Card -->
 <div class="bg-surface-container-lowest rounded-3xl p-8 md:p-12 shadow-[0_20px_40px_rgba(44,52,55,0.06)] ring-1 ring-outline-variant/15">
 <h2 class="text-2xl font-headline font-bold text-on-surface mb-8 text-center">おかえりなさい</h2>
-<form class="space-y-6">
+<div id="auth-message" class="hidden mb-6 rounded-xl px-4 py-3 text-sm font-medium"></div>
+<form class="space-y-6" id="login-form">
 <!-- Email Input -->
 <div class="space-y-2">
 <label class="block text-sm font-semibold text-secondary px-1" for="email">メールアドレス</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">mail</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="email" name="email" placeholder="example@myremo.jp" type="email"/>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="email" name="email" placeholder="example@myremo.jp" type="email" required/>
 </div>
 </div>
 <!-- Password Input -->
@@ -127,7 +128,7 @@
 </div>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="password" name="password" placeholder="••••••••" type="password"/>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all text-on-surface placeholder:text-on-surface-variant/60" id="password" name="password" placeholder="••••••••" type="password" required/>
 </div>
 </div>
 <!-- Remember Me -->
@@ -141,11 +142,36 @@
 <span class="material-symbols-outlined text-xl">login</span>
 </button>
 </form>
+<script src="assets/js/myremote-auth.js"></script>
 <script>
-document.querySelector('form').addEventListener('submit', function(e) {
+const loginForm = document.getElementById('login-form');
+const authMessage = document.getElementById('auth-message');
+const loginButton = loginForm.querySelector('button[type="submit"]');
+
+function showAuthMessage(message, isError) {
+  authMessage.textContent = message;
+  authMessage.className = 'mb-6 rounded-xl px-4 py-3 text-sm font-medium ' + (isError ? 'bg-error/10 text-error' : 'bg-primary/10 text-primary');
+}
+
+loginForm.addEventListener('submit', async function(e) {
   e.preventDefault();
-  try { sessionStorage.setItem('loggedIn', '1'); } catch (err) {}
-  window.location.href = 'jobs.html';
+  loginButton.disabled = true;
+  loginButton.classList.add('opacity-70');
+  showAuthMessage('ログインしています。', false);
+
+  try {
+    await window.myremoteAuth.login(
+      document.getElementById('email').value,
+      document.getElementById('password').value,
+      document.getElementById('remember').checked
+    );
+    const next = new URLSearchParams(window.location.search).get('next');
+    window.location.href = next || 'jobs.html';
+  } catch (error) {
+    showAuthMessage(error.message, true);
+    loginButton.disabled = false;
+    loginButton.classList.remove('opacity-70');
+  }
 });
 </script>
 <!-- Divider -->
