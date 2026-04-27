@@ -161,7 +161,7 @@
 <!-- Left: Main Content Section -->
 <div class="lg:w-2/3 space-y-16">
 <!-- Summary Bento Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div id="job-summary-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/10 shadow-sm">
 <span class="material-symbols-outlined text-primary mb-3">calendar_today</span>
 <h4 class="text-label-md font-bold text-on-surface-variant mb-1">開始時期</h4>
@@ -194,7 +194,7 @@
 </div>
 </div>
 <!-- Detailed Content -->
-<div class="space-y-12">
+<div id="job-detail-sections" class="space-y-12">
 <section>
 <h2 class="text-headline-md font-headline font-bold text-on-surface mb-6 flex items-center gap-3">
 <span class="w-1.5 h-8 bg-primary rounded-full"></span>
@@ -319,7 +319,7 @@
 </div>
 <div>
 <p class="text-xs text-on-surface-variant">掲載企業</p>
-<p class="font-bold text-on-surface">株式会社テックキャリア</p>
+<p id="job-company-name" class="font-bold text-on-surface">株式会社テックキャリア</p>
 </div>
 </div>
 </div>
@@ -400,10 +400,89 @@ const jobTerms = (job, taxonomy) => {
 };
 
 const metaValue = (job, key, fallback = '') => job.meta?.[key] || fallback;
+const linesFromMeta = (job, key) => metaValue(job, key)
+  .split(/\r?\n/)
+  .map((line) => line.trim())
+  .filter(Boolean);
 
 const setText = (selector, value) => {
   const node = document.querySelector(selector);
   if (node && value) node.textContent = value;
+};
+
+const summaryCard = (icon, label, value) => `
+  <div class="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/10 shadow-sm">
+    <span class="material-symbols-outlined text-primary mb-3">${icon}</span>
+    <h4 class="text-label-md font-bold text-on-surface-variant mb-1">${label}</h4>
+    <p class="font-bold text-on-surface">${value}</p>
+  </div>
+`;
+
+const listSection = (title, items, tone = 'primary') => `
+  <section class="p-8 rounded-3xl ${tone === 'primary' ? 'bg-surface-container-low' : 'border-2 border-dashed border-outline-variant/30'}">
+    <h3 class="text-title-lg font-bold text-on-surface mb-6">${title}</h3>
+    <ul class="space-y-4">
+      ${items.map((item) => `
+        <li class="flex gap-3 text-secondary">
+          <span class="${tone === 'primary' ? 'text-primary' : 'text-tertiary'} font-bold">•</span>
+          <span>${item}</span>
+        </li>
+      `).join('')}
+    </ul>
+  </section>
+`;
+
+const detailSections = (job, summary) => {
+  const description = linesFromMeta(job, 'job_description');
+  const required = linesFromMeta(job, 'required_skills');
+  const preferred = linesFromMeta(job, 'preferred_skills');
+  const features = linesFromMeta(job, 'job_features');
+  const selection = linesFromMeta(job, 'selection_flow');
+  const note = metaValue(job, 'detail_note');
+
+  return `
+    <section>
+      <h2 class="text-headline-md font-headline font-bold text-on-surface mb-6 flex items-center gap-3">
+        <span class="w-1.5 h-8 bg-primary rounded-full"></span>
+        業務内容
+      </h2>
+      <div class="text-body-lg text-secondary leading-relaxed space-y-4">
+        ${description.length
+          ? description.map((line) => `<p>${line}</p>`).join('')
+          : `<p>${summary}</p>`}
+      </div>
+    </section>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      ${listSection('必須スキル', required.length ? required : ['詳細は面談時に確認します'], 'primary')}
+      ${listSection('歓迎スキル', preferred.length ? preferred : ['関連業務の経験があれば歓迎します'], 'tertiary')}
+    </div>
+    <section>
+      <h2 class="text-headline-md font-headline font-bold text-on-surface mb-6 flex items-center gap-3">
+        <span class="w-1.5 h-8 bg-tertiary rounded-full"></span>
+        この案件の特徴
+      </h2>
+      <div class="flex flex-wrap gap-4">
+        ${(features.length ? features : ['リモートワーク中心', '条件は個別に相談可能']).map((feature) => `
+          <div class="px-6 py-4 rounded-2xl bg-white shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <p class="font-bold text-on-surface">${feature}</p>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+    <section class="p-8 rounded-3xl bg-white border border-outline-variant/10 shadow-sm">
+      <h2 class="text-headline-md font-headline font-bold text-on-surface mb-6 flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary">timeline</span>
+        選考フロー
+      </h2>
+      <ol class="space-y-3 list-decimal pl-6 text-secondary">
+        ${(selection.length ? selection : ['応募', '担当者から連絡', 'オンライン面談', '条件確認後スタート']).map((step) => `<li>${step}</li>`).join('')}
+      </ol>
+      ${note ? `<p class="mt-6 text-sm text-on-surface-variant">${note}</p>` : ''}
+    </section>
+  `;
 };
 
 const loadJobDetail = async () => {
@@ -421,7 +500,7 @@ const loadJobDetail = async () => {
     if (!job) throw new Error('Job not found');
 
     const title = textFromHtml(job.title?.rendered);
-    const excerpt = textFromHtml(job.excerpt?.rendered);
+    const excerpt = metaValue(job, 'job_summary', textFromHtml(job.excerpt?.rendered));
     const industries = jobTerms(job, 'job_industry');
     const types = jobTerms(job, 'job_type');
     const styles = jobTerms(job, 'work_style');
@@ -441,13 +520,25 @@ const loadJobDetail = async () => {
       heroImage.alt = title;
     }
 
-    const content = document.querySelector('.text-body-lg.text-secondary');
-    if (content && job.content?.rendered) {
-      content.innerHTML = job.content.rendered;
+    const summaryGrid = document.getElementById('job-summary-grid');
+    if (summaryGrid) {
+      summaryGrid.innerHTML = [
+        summaryCard('calendar_today', '開始時期', metaValue(job, 'start_date', '応相談')),
+        summaryCard('schedule', '稼働時間', metaValue(job, 'work_hours', '応相談')),
+        summaryCard('contract', '契約期間', metaValue(job, 'contract_period', metaValue(job, 'employment_type', '応相談'))),
+        summaryCard('location_on', '勤務地', metaValue(job, 'location', styles[0] || 'リモート')),
+        summaryCard('groups', '募集人数', metaValue(job, 'openings', '応相談')),
+        summaryCard('forum', '面談回数', metaValue(job, 'interview_count', '応相談')),
+      ].join('');
+    }
+
+    const detail = document.getElementById('job-detail-sections');
+    if (detail) {
+      detail.innerHTML = detailSections(job, excerpt);
     }
 
     const typeLabel = [industries[0], types[0]].filter(Boolean).join(' / ');
-    const companyCard = document.querySelector('.bg-surface-container-low.p-6.rounded-3xl .font-bold');
+    const companyCard = document.getElementById('job-company-name');
     if (companyCard) companyCard.textContent = metaValue(job, 'company_name', typeLabel || 'MyRemo掲載求人');
   } catch (error) {
     console.error(error);
