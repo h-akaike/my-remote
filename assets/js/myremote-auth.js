@@ -94,7 +94,7 @@
       link.style.minWidth = '0';
 
       const logo = document.createElement('img');
-      logo.src = 'assets/logo.png';
+      logo.src = 'assets/favicon-180.png';
       logo.alt = '';
       logo.style.width = '2.25rem';
       logo.style.height = '2.25rem';
