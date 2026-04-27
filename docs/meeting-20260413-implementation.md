@@ -181,3 +181,16 @@
 3. 求人一覧 → 任意の求人 → `recruit.html` → 応募する
 4. `apply.html` で氏名/メール/電話が自動入力されていることを確認
 5. 送信 → `apply-complete.html` で完了表示
+
+---
+
+## 2026-04-27 レビューmtgからの追加対応候補
+
+関連対応ログ: [meeting-20260427-2101-issues.md](./meeting-20260427-2101-issues.md)
+連絡経路ルール: [communication-policy.md](./communication-policy.md)
+
+4/27 21:01の自分用メモは、Zoom Docs本文の取得に失敗した初回整理では連絡経路の課題のみとして扱っていた。
+
+Zoom AI Companionの要約生成結果を取得したところ、実際にはトップページ改善、応募フォーム、求人追加フォーム、通知、コラム用メディア、ロゴ変更などの追加修正候補が含まれていた。
+
+そのため、追加修正候補の正本は `meeting-20260427-2101-issues.md` とする。`communication-policy.md` は補足的な連絡経路ルールとして残すが、このmtgの主タスク完了判定には使わない。

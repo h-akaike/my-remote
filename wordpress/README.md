@@ -8,6 +8,20 @@ WordPressはCMSとして使い、フロントエンドはNetlify側からREST AP
 - 求人などのコンテンツはWordPress標準エクスポートのXMLを `exports/` に保存します。
 - WordPress本体、公式プラグイン、アップロード画像、DBダンプ、認証情報はGit管理しません。
 
+## 管理画面・サーバー
+
+### さくらレンタルサーバー
+
+- コントロールパネルURL: https://secure.sakura.ad.jp/rs/cp/
+- アカウントID: `enn-musubi.sakura.ne.jp`
+- パスワード: Git管理しない。ローカル専用の `wordpress/access.local.md` を参照する。
+
+### WordPress
+
+- 管理画面URL: https://enn-musubi.sakura.ne.jp/my-remote/wp-login.php
+- ユーザーID: `my-remote`
+- パスワード: Git管理しない。ローカル専用の `wordpress/access.local.md` を参照する。
+
 ## 会員・応募API
 
 会員はWordPress標準ユーザーDBに `applicant` ロールで保存し、応募は `application` カスタム投稿タイプに保存します。
@@ -20,6 +34,20 @@ WordPressはCMSとして使い、フロントエンドはNetlify側からREST AP
 - `POST /wp-json/myremote/v1/contact`: お問い合わせ送信
 
 Netlify側は `assets/js/myremote-auth.js` からBearerトークンでこれらのAPIを呼び出します。
+
+## 通知メール設定
+
+WordPress管理画面の `設定 > MyRemo設定` で応募・お問い合わせ通知の送信先を設定できます。
+
+未設定時はWordPressの管理者メールアドレスを使います。リリース時はここを info@ などの本番運用アドレスへ切り替えてください。
+
+## コラム管理
+
+`コラム` カスタム投稿タイプで記事を管理します。
+
+- アイキャッチ画像: 一覧・詳細で使う代表画像
+- 本文内メディア: ACFのギャラリーフィールドで本文用画像を管理
+- コラムカテゴリ: コラム一覧の分類用
 
 ## 本番への配置
 
