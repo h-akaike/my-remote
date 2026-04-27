@@ -401,7 +401,7 @@ const jobTerms = (job, taxonomy) => {
 
 const metaValue = (job, key, fallback = '') => job.meta?.[key] || fallback;
 const linesFromMeta = (job, key) => metaValue(job, key)
-  .split(/\r?\n/)
+  .split(/\r?\n|\\n/)
   .map((line) => line.trim())
   .filter(Boolean);
 

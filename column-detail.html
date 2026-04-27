@@ -362,7 +362,7 @@ const safeUrl = (value, fallback = '') => {
 };
 
 const metaValue = (column, key, fallback = '') => column.meta?.[key] || column.acf?.[key] || fallback;
-const lines = (value = '') => value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+const lines = (value = '') => value.split(/\r?\n|\\n/).map((line) => line.trim()).filter(Boolean);
 const dateLabel = (date) => new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(date)).replaceAll('/', '.');
 const terms = (column) => (column._embedded?.['wp:term'] || []).flat().filter((term) => term.taxonomy === 'column_category');
 
