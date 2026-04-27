@@ -127,37 +127,37 @@
 <li><span class="material-symbols-outlined text-[16px]">chevron_right</span></li>
 <li class="hover:text-primary transition-colors cursor-pointer">コラム</li>
 <li><span class="material-symbols-outlined text-[16px]">chevron_right</span></li>
-<li class="text-on-surface font-semibold truncate">フルリモートで働く前に準備しておくべき5つのこと</li>
+<li id="breadcrumb-title" class="text-on-surface font-semibold truncate">コラム詳細</li>
 </ol>
 </nav>
 <!-- Article Header -->
 <header class="max-w-4xl mx-auto px-6 text-center md:text-left mb-12">
-<span class="inline-block px-4 py-1.5 bg-tertiary-container text-on-tertiary-container text-xs font-bold rounded-full mb-6 font-label tracking-wider">
+<span id="column-category" class="inline-block px-4 py-1.5 bg-tertiary-container text-on-tertiary-container text-xs font-bold rounded-full mb-6 font-label tracking-wider">
                 準備
             </span>
-<h1 class="text-4xl md:text-5xl font-extrabold font-headline leading-tight text-on-surface mb-8 tracking-tight">
+<h1 id="column-title" class="text-4xl md:text-5xl font-extrabold font-headline leading-tight text-on-surface mb-8 tracking-tight">
                 フルリモートで働く前に<br class="hidden md:block"/>準備しておくべき5つのこと
             </h1>
 <div class="flex items-center justify-center md:justify-start gap-6 text-on-surface-variant text-sm font-label">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-[18px]">calendar_today</span>
-<span>2024.11.15</span>
+<span id="column-date">2024.11.15</span>
 </div>
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-[18px]">update</span>
-<span>Updated: 2024.11.20</span>
+<span id="column-updated">Updated: 2024.11.20</span>
 </div>
 </div>
 </header>
 <!-- Main Eyecatch -->
 <section class="max-w-5xl mx-auto px-6 mb-16">
 <div class="relative aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl">
-<img class="w-full h-full object-cover" alt="Modern workspace with a clean laptop, coffee cup, and soft morning light filtering through a window, serene atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDStO0Qez5cNomFaCFn-yYdT1sA__R_I-yAK5kDXsQ8o3czjP88xj55KpB-8SuMvGimCV0UgAbULoP7eq8LHSETc4iKVf0v8ATMLogdUm7Ao7NadwHRV_7V2mD7SCsHb77IchlPFoQyo8LNOW72p0ttjulC3yotus6qWKVf20bIO5pfzyNxaQ8J-cwrKgsz1GT5mTz_bUeGQ1Rdu6O4J4js2N_WecG5AggWqhIDk95R_SDiilDGjJmEtm35-j51P1e56H4dLRQvOLY"/>
+<img id="column-eyecatch" class="w-full h-full object-cover" alt="Modern workspace with a clean laptop, coffee cup, and soft morning light filtering through a window, serene atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDStO0Qez5cNomFaCFn-yYdT1sA__R_I-yAK5kDXsQ8o3czjP88xj55KpB-8SuMvGimCV0UgAbULoP7eq8LHSETc4iKVf0v8ATMLogdUm7Ao7NadwHRV_7V2mD7SCsHb77IchlPFoQyo8LNOW72p0ttjulC3yotus6qWKVf20bIO5pfzyNxaQ8J-cwrKgsz1GT5mTz_bUeGQ1Rdu6O4J4js2N_WecG5AggWqhIDk95R_SDiilDGjJmEtm35-j51P1e56H4dLRQvOLY"/>
 <div class="absolute inset-0 bg-gradient-to-t from-on-surface/20 to-transparent"></div>
 </div>
 </section>
 <!-- Article Body -->
-<article class="max-w-3xl mx-auto px-6">
+<article id="column-article" class="max-w-3xl mx-auto px-6">
 <div class="prose prose-slate max-w-none text-on-surface leading-relaxed">
 <p class="text-lg mb-10 text-on-surface-variant font-body leading-loose">
                     近年、働き方の多様化が進み、フルリモートワークを導入する企業が急増しています。通勤時間の削減や場所を選ばない働き方は非常に魅力的ですが、実際にスタートしてから「思っていたのと違う」「効率が上がらない」と悩む方も少なくありません。今回は、フルリモートワークを成功させるために不可欠な5つの準備ポイントを解説します。
@@ -337,5 +337,104 @@
 </div>
 </div>
 </footer>
+<script>
+const WP_API_BASE = 'https://enn-musubi.sakura.ne.jp/my-remote/wp-json/wp/v2';
+const FALLBACK_COLUMN_IMAGE = 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80';
+
+const textFromHtml = (html = '') => {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.content.textContent.trim();
+};
+
+const metaValue = (column, key, fallback = '') => column.meta?.[key] || column.acf?.[key] || fallback;
+const lines = (value = '') => value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+const dateLabel = (date) => new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(date)).replaceAll('/', '.');
+const terms = (column) => (column._embedded?.['wp:term'] || []).flat().filter((term) => term.taxonomy === 'column_category');
+
+const paragraphs = (value) => lines(value).map((line) => `<p class="mb-8">${line}</p>`).join('');
+const section = (heading, body) => heading || body ? `
+  <h2 class="text-3xl font-bold font-headline mt-16 mb-8 border-l-4 border-primary pl-6 py-1">${heading || '本文'}</h2>
+  ${paragraphs(body)}
+` : '';
+
+const checklist = (items) => items.length ? `
+  <div class="bg-surface-container rounded-3xl p-8 my-12 relative overflow-hidden">
+    <div class="relative z-10">
+      <h3 class="flex items-center gap-3 text-xl font-bold font-headline mb-6 text-primary">
+        <span class="material-symbols-outlined">lightbulb</span>
+        チェックリスト
+      </h3>
+      <div class="grid md:grid-cols-2 gap-6 font-label">
+        ${items.map((item, index) => `
+          <div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+            <span class="text-2xl font-bold text-primary/30">${String(index + 1).padStart(2, '0')}</span>
+            <span class="font-medium">${item}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </div>
+` : '';
+
+const mediaBlock = (url, caption) => url ? `
+  <div class="my-12 rounded-2xl overflow-hidden shadow-sm">
+    <img class="w-full aspect-video object-cover" alt="${caption || 'コラム画像'}" src="${url}">
+    ${caption ? `<p class="text-xs text-on-surface-variant text-center mt-3 font-label italic">${caption}</p>` : ''}
+  </div>
+` : '';
+
+const renderColumn = (column) => {
+  const title = textFromHtml(column.title?.rendered);
+  const category = terms(column)[0]?.name || 'コラム';
+  const lead = metaValue(column, 'lead', textFromHtml(column.excerpt?.rendered));
+  const image = metaValue(column, 'eyecatch_url', FALLBACK_COLUMN_IMAGE);
+  const ctaLabel = metaValue(column, 'cta_label', '求人一覧を見る');
+  const ctaUrl = metaValue(column, 'cta_url', 'jobs.html');
+
+  document.title = `${title} - MyRemo (マイリモ)`;
+  document.getElementById('breadcrumb-title').textContent = title;
+  document.getElementById('column-title').textContent = title;
+  document.getElementById('column-category').textContent = category;
+  document.getElementById('column-date').textContent = dateLabel(column.date);
+  document.getElementById('column-updated').textContent = `Updated: ${dateLabel(column.modified)}`;
+  document.getElementById('column-eyecatch').src = image;
+  document.getElementById('column-eyecatch').alt = title;
+
+  document.getElementById('column-article').innerHTML = `
+    <div class="prose prose-slate max-w-none text-on-surface leading-relaxed">
+      <p class="text-lg mb-10 text-on-surface-variant font-body leading-loose">${lead}</p>
+      ${section(metaValue(column, 'section_1_heading'), metaValue(column, 'section_1_body'))}
+      ${mediaBlock(metaValue(column, 'body_media_url'), metaValue(column, 'body_media_caption'))}
+      ${section(metaValue(column, 'section_2_heading'), metaValue(column, 'section_2_body'))}
+      ${checklist(lines(metaValue(column, 'checklist_items')))}
+      ${section(metaValue(column, 'section_3_heading'), metaValue(column, 'section_3_body'))}
+    </div>
+    <section class="mt-20">
+      <div class="bg-gradient-to-br from-secondary-dim to-on-secondary-container rounded-[2.5rem] p-10 md:p-16 text-center shadow-xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white font-headline mb-6">あなたに合う在宅ワークを探しませんか？</h2>
+        <p class="text-blue-100/80 mb-10 max-w-2xl mx-auto">MyRemoでは、フルリモートに特化した求人と働き方のヒントをお届けしています。</p>
+        <a class="w-full md:w-auto px-10 py-5 bg-gradient-to-r from-primary to-primary-container text-white font-bold rounded-2xl shadow-xl shadow-primary/30 hover:shadow-primary/40 transition-all inline-block" href="${ctaUrl}">${ctaLabel}</a>
+      </div>
+    </section>
+  `;
+};
+
+const loadColumn = async () => {
+  const slug = new URLSearchParams(window.location.search).get('column');
+  if (!slug) return;
+
+  try {
+    const response = await fetch(`${WP_API_BASE}/columns?slug=${encodeURIComponent(slug)}&_embed=1`);
+    if (!response.ok) throw new Error(`WordPress API error: ${response.status}`);
+    const [column] = await response.json();
+    if (column) renderColumn(column);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+loadColumn();
+</script>
 <script src="assets/js/myremote-auth.js"></script>
 </body></html>
