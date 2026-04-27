@@ -417,7 +417,7 @@ const metaValue = (job, key, fallback = '') => job.meta?.[key] || fallback;
 
 const renderJobCard = (job) => {
   const title = textFromHtml(job.title?.rendered);
-  const excerpt = textFromHtml(job.excerpt?.rendered);
+  const excerpt = metaValue(job, 'job_summary', textFromHtml(job.excerpt?.rendered));
   const types = jobTerms(job, 'job_type');
   const industries = jobTerms(job, 'job_industry');
   const styles = jobTerms(job, 'work_style');

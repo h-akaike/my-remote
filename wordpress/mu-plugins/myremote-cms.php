@@ -34,7 +34,7 @@ add_action('init', function () {
         'show_in_rest' => true,
         'rest_base' => 'jobs',
         'menu_icon' => 'dashicons-businessperson',
-        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'custom-fields'],
+        'supports' => ['title', 'excerpt', 'thumbnail', 'revisions', 'custom-fields'],
         'has_archive' => true,
         'rewrite' => ['slug' => 'jobs'],
     ]);
@@ -114,6 +114,20 @@ add_action('init', function () {
         'featured_label',
         'application_url',
         'image_url',
+        'start_date',
+        'contract_period',
+        'openings',
+        'interview_count',
+    ];
+
+    $textarea_meta_fields = [
+        'job_summary',
+        'job_description',
+        'required_skills',
+        'preferred_skills',
+        'job_features',
+        'selection_flow',
+        'detail_note',
     ];
 
     foreach ($meta_fields as $field) {
@@ -122,6 +136,16 @@ add_action('init', function () {
             'single' => true,
             'show_in_rest' => true,
             'sanitize_callback' => 'sanitize_text_field',
+            'auth_callback' => '__return_true',
+        ]);
+    }
+
+    foreach ($textarea_meta_fields as $field) {
+        register_post_meta('job', $field, [
+            'type' => 'string',
+            'single' => true,
+            'show_in_rest' => true,
+            'sanitize_callback' => 'sanitize_textarea_field',
             'auth_callback' => '__return_true',
         ]);
     }
@@ -824,6 +848,89 @@ add_action('acf/init', function () {
                 'label' => '画像URL',
                 'name' => 'image_url',
                 'type' => 'url',
+            ],
+            [
+                'key' => 'field_myremote_job_summary',
+                'label' => '求人概要',
+                'name' => 'job_summary',
+                'type' => 'textarea',
+                'rows' => 3,
+                'instructions' => '求人一覧と詳細上部に表示する短い説明文です。未入力時は抜粋を使います。',
+            ],
+            [
+                'key' => 'field_myremote_start_date',
+                'label' => '開始時期',
+                'name' => 'start_date',
+                'type' => 'text',
+                'placeholder' => '例: 即日〜応相談',
+            ],
+            [
+                'key' => 'field_myremote_contract_period',
+                'label' => '契約期間',
+                'name' => 'contract_period',
+                'type' => 'text',
+                'placeholder' => '例: 3ヶ月更新（長期前提）',
+            ],
+            [
+                'key' => 'field_myremote_openings',
+                'label' => '募集人数',
+                'name' => 'openings',
+                'type' => 'text',
+                'placeholder' => '例: 1名',
+            ],
+            [
+                'key' => 'field_myremote_interview_count',
+                'label' => '面談回数',
+                'name' => 'interview_count',
+                'type' => 'text',
+                'placeholder' => '例: オンライン1回',
+            ],
+            [
+                'key' => 'field_myremote_job_description',
+                'label' => '業務内容',
+                'name' => 'job_description',
+                'type' => 'textarea',
+                'rows' => 6,
+                'instructions' => '1行ごとに表示します。箇条書きにしたい場合も1行1項目で入力してください。',
+            ],
+            [
+                'key' => 'field_myremote_required_skills',
+                'label' => '必須スキル',
+                'name' => 'required_skills',
+                'type' => 'textarea',
+                'rows' => 5,
+                'instructions' => '1行1項目で入力してください。',
+            ],
+            [
+                'key' => 'field_myremote_preferred_skills',
+                'label' => '歓迎スキル',
+                'name' => 'preferred_skills',
+                'type' => 'textarea',
+                'rows' => 5,
+                'instructions' => '1行1項目で入力してください。',
+            ],
+            [
+                'key' => 'field_myremote_job_features',
+                'label' => 'この案件の特徴',
+                'name' => 'job_features',
+                'type' => 'textarea',
+                'rows' => 5,
+                'instructions' => '1行1項目で入力してください。',
+            ],
+            [
+                'key' => 'field_myremote_selection_flow',
+                'label' => '選考フロー',
+                'name' => 'selection_flow',
+                'type' => 'textarea',
+                'rows' => 4,
+                'instructions' => '1行1ステップで入力してください。',
+            ],
+            [
+                'key' => 'field_myremote_detail_note',
+                'label' => '補足メモ',
+                'name' => 'detail_note',
+                'type' => 'textarea',
+                'rows' => 3,
             ],
         ],
         'location' => [
