@@ -11,6 +11,7 @@ if (!defined('ABSPATH')) {
 
 const MYREMOTE_TOKEN_HASH_META = '_myremote_auth_token_hash';
 const MYREMOTE_TOKEN_EXPIRES_META = '_myremote_auth_token_expires';
+const MYREMOTE_NOTIFICATION_EMAIL_OPTION = 'myremote_notification_email';
 
 add_action('init', function () {
     add_role('applicant', '応募者', [
@@ -38,6 +39,27 @@ add_action('init', function () {
         'rewrite' => ['slug' => 'jobs'],
     ]);
 
+    register_post_type('myremote_column', [
+        'labels' => [
+            'name' => 'コラム',
+            'singular_name' => 'コラム',
+            'add_new_item' => 'コラムを追加',
+            'edit_item' => 'コラムを編集',
+            'new_item' => '新規コラム',
+            'view_item' => 'コラムを表示',
+            'search_items' => 'コラムを検索',
+            'not_found' => 'コラムが見つかりません',
+            'menu_name' => 'コラム',
+        ],
+        'public' => true,
+        'show_in_rest' => true,
+        'rest_base' => 'columns',
+        'menu_icon' => 'dashicons-welcome-write-blog',
+        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author'],
+        'has_archive' => true,
+        'rewrite' => ['slug' => 'columns'],
+    ]);
+
     $taxonomies = [
         'job_type' => ['name' => '職種', 'slug' => 'job-types'],
         'job_industry' => ['name' => '業界', 'slug' => 'job-industries'],
@@ -63,6 +85,24 @@ add_action('init', function () {
             'rewrite' => ['slug' => $config['slug']],
         ]);
     }
+
+    register_taxonomy('column_category', ['myremote_column'], [
+        'labels' => [
+            'name' => 'コラムカテゴリ',
+            'singular_name' => 'コラムカテゴリ',
+            'search_items' => 'コラムカテゴリを検索',
+            'all_items' => 'すべてのコラムカテゴリ',
+            'edit_item' => 'コラムカテゴリを編集',
+            'update_item' => 'コラムカテゴリを更新',
+            'add_new_item' => 'コラムカテゴリを追加',
+            'menu_name' => 'コラムカテゴリ',
+        ],
+        'hierarchical' => true,
+        'public' => true,
+        'show_in_rest' => true,
+        'rest_base' => 'column-categories',
+        'rewrite' => ['slug' => 'column-categories'],
+    ]);
 
     $meta_fields = [
         'company_name',
@@ -227,6 +267,69 @@ add_action('manage_application_posts_custom_column', function (string $column, i
         }
     }
 }, 10, 2);
+
+add_action('admin_menu', function (): void {
+    add_options_page(
+        'MyRemo設定',
+        'MyRemo設定',
+        'manage_options',
+        'myremote-settings',
+        'myremote_render_settings_page'
+    );
+});
+
+add_action('admin_init', function (): void {
+    register_setting('myremote_settings', MYREMOTE_NOTIFICATION_EMAIL_OPTION, [
+        'type' => 'string',
+        'sanitize_callback' => 'sanitize_email',
+        'default' => get_option('admin_email'),
+    ]);
+
+    add_settings_section(
+        'myremote_mail_section',
+        'メール通知',
+        function (): void {
+            echo '<p>応募や問い合わせの通知先を設定します。リリース時に info@ などの本番運用アドレスへ切り替えてください。</p>';
+        },
+        'myremote-settings'
+    );
+
+    add_settings_field(
+        MYREMOTE_NOTIFICATION_EMAIL_OPTION,
+        '応募通知メールアドレス',
+        function (): void {
+            $value = myremote_notification_email();
+            echo '<input type="email" class="regular-text" name="' . esc_attr(MYREMOTE_NOTIFICATION_EMAIL_OPTION) . '" value="' . esc_attr($value) . '" placeholder="info@example.com">';
+        },
+        'myremote-settings',
+        'myremote_mail_section'
+    );
+});
+
+function myremote_render_settings_page(): void
+{
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+    ?>
+    <div class="wrap">
+        <h1>MyRemo設定</h1>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('myremote_settings');
+            do_settings_sections('myremote-settings');
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+function myremote_notification_email(): string
+{
+    $email = (string) get_option(MYREMOTE_NOTIFICATION_EMAIL_OPTION, get_option('admin_email'));
+    return is_email($email) ? $email : (string) get_option('admin_email');
+}
 
 function myremote_request_data(WP_REST_Request $request): array
 {
@@ -424,7 +527,7 @@ function myremote_rest_contact(WP_REST_Request $request)
     $subject = '【MyRemo】お問い合わせ';
     $body = "お問い合わせが届きました。\n\nお名前: {$name}\nメール: {$email}\n\n内容:\n{$message}\n";
     $headers = ['Reply-To: ' . $name . ' <' . $email . '>'];
-    $sent = wp_mail(get_option('admin_email'), $subject, $body, $headers);
+    $sent = wp_mail(myremote_notification_email(), $subject, $body, $headers);
 
     if (!$sent) {
         return new WP_Error('myremote_contact_failed', 'お問い合わせを送信できませんでした。', ['status' => 500]);
@@ -546,7 +649,7 @@ function myremote_send_application_emails(int $post_id): void
         (string) get_post_meta($post_id, 'first_name', true)
     );
     $job_title = (string) get_post_meta($post_id, 'job_title', true);
-    $admin_email = get_option('admin_email');
+    $admin_email = myremote_notification_email();
 
     if (is_email($email)) {
         wp_mail(
@@ -729,6 +832,56 @@ add_action('acf/init', function () {
                     'param' => 'post_type',
                     'operator' => '==',
                     'value' => 'job',
+                ],
+            ],
+        ],
+        'position' => 'acf_after_title',
+        'style' => 'default',
+        'active' => true,
+        'show_in_rest' => 1,
+    ]);
+
+    acf_add_local_field_group([
+        'key' => 'group_myremote_column_fields',
+        'title' => 'コラム情報',
+        'fields' => [
+            [
+                'key' => 'field_myremote_column_lead',
+                'label' => 'リード文',
+                'name' => 'lead',
+                'type' => 'textarea',
+                'rows' => 3,
+            ],
+            [
+                'key' => 'field_myremote_column_media',
+                'label' => '本文内メディア',
+                'name' => 'body_media',
+                'type' => 'gallery',
+                'instructions' => 'コラム本文で使う画像を追加します。アイキャッチ画像は右側の「アイキャッチ画像」を使用してください。',
+                'return_format' => 'array',
+                'preview_size' => 'medium',
+            ],
+            [
+                'key' => 'field_myremote_column_cta_label',
+                'label' => 'CTAラベル',
+                'name' => 'cta_label',
+                'type' => 'text',
+                'default_value' => '関連する求人を見る',
+            ],
+            [
+                'key' => 'field_myremote_column_cta_url',
+                'label' => 'CTA URL',
+                'name' => 'cta_url',
+                'type' => 'url',
+                'default_value' => '/jobs.html',
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'myremote_column',
                 ],
             ],
         ],

@@ -80,6 +80,36 @@
     });
   }
 
+  function enhanceBranding() {
+    document.querySelectorAll('a[href="index.html"]').forEach((link) => {
+      const label = link.textContent.trim();
+      if (!/^MyRemo/.test(label) || link.dataset.myremoteBrand === '1') return;
+
+      link.dataset.myremoteBrand = '1';
+      link.textContent = '';
+      link.setAttribute('aria-label', 'MyRemo トップへ');
+      link.style.display = 'inline-flex';
+      link.style.alignItems = 'center';
+      link.style.gap = '0.625rem';
+      link.style.minWidth = '0';
+
+      const logo = document.createElement('img');
+      logo.src = 'assets/logo.png';
+      logo.alt = '';
+      logo.style.width = '2.25rem';
+      logo.style.height = '2.25rem';
+      logo.style.objectFit = 'contain';
+      logo.style.flex = '0 0 auto';
+
+      const text = document.createElement('span');
+      text.textContent = 'MyRemo';
+      text.style.fontWeight = '800';
+      text.style.letterSpacing = '0';
+
+      link.append(logo, text);
+    });
+  }
+
   function rewriteStaticLinks() {
     const labelToHref = {
       'お問い合わせ': 'contact.html',
@@ -158,15 +188,18 @@
     storedUser,
     enhanceHeader,
     rewriteStaticLinks,
+    enhanceBranding,
   };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       rewriteStaticLinks();
+      enhanceBranding();
       enhanceHeader();
     });
   } else {
     rewriteStaticLinks();
+    enhanceBranding();
     enhanceHeader();
   }
 })();
