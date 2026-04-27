@@ -181,3 +181,14 @@
 3. 求人一覧 → 任意の求人 → `recruit.html` → 応募する
 4. `apply.html` で氏名/メール/電話が自動入力されていることを確認
 5. 送信 → `apply-complete.html` で完了表示
+
+---
+
+## 2026-04-27 自分用メモからの追加対応
+
+関連対応ログ: [meeting-20260427-2101-issues.md](./meeting-20260427-2101-issues.md)
+連絡経路ルール: [communication-policy.md](./communication-policy.md)
+
+4/27 21:01の自分用メモでは、画面そのものの追加修正ではなく、Chatwork / LINE などの連絡経路が分散し、依頼・決定事項が後から追いにくいという運用課題が出ていた。
+
+対応として、My Remoteの修正指摘は `docs/meeting-*-issues.md` に起こし、連絡経路の使い分けは `communication-policy.md` に集約した。これにより、今後のレビューで出た修正指摘をローカルリポジトリ内で追跡し、対応済み・未対応を明示できる状態にした。
