@@ -1,1 +1,4 @@
 .vercel
+*.local.md
+*.secret.md
+secrets/

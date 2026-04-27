@@ -8,6 +8,20 @@ WordPressはCMSとして使い、フロントエンドはNetlify側からREST AP
 - 求人などのコンテンツはWordPress標準エクスポートのXMLを `exports/` に保存します。
 - WordPress本体、公式プラグイン、アップロード画像、DBダンプ、認証情報はGit管理しません。
 
+## 管理画面・サーバー
+
+### さくらレンタルサーバー
+
+- コントロールパネルURL: https://secure.sakura.ad.jp/rs/cp/
+- アカウントID: `enn-musubi.sakura.ne.jp`
+- パスワード: Git管理しない。ローカル専用の `wordpress/access.local.md` を参照する。
+
+### WordPress
+
+- 管理画面URL: https://enn-musubi.sakura.ne.jp/my-remote/wp-login.php
+- ユーザーID: `my-remote`
+- パスワード: Git管理しない。ローカル専用の `wordpress/access.local.md` を参照する。
+
 ## 会員・応募API
 
 会員はWordPress標準ユーザーDBに `applicant` ロールで保存し、応募は `application` カスタム投稿タイプに保存します。
