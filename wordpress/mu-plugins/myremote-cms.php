@@ -55,7 +55,7 @@ add_action('init', function () {
         'show_in_rest' => true,
         'rest_base' => 'columns',
         'menu_icon' => 'dashicons-welcome-write-blog',
-        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author'],
+        'supports' => ['title', 'excerpt', 'thumbnail', 'revisions', 'author', 'custom-fields'],
         'has_archive' => true,
         'rewrite' => ['slug' => 'columns'],
     ]);
@@ -103,6 +103,32 @@ add_action('init', function () {
         'rest_base' => 'column-categories',
         'rewrite' => ['slug' => 'column-categories'],
     ]);
+
+    $column_meta_fields = [
+        'lead',
+        'eyecatch_url',
+        'body_media_url',
+        'body_media_caption',
+        'section_1_heading',
+        'section_1_body',
+        'section_2_heading',
+        'section_2_body',
+        'section_3_heading',
+        'section_3_body',
+        'checklist_items',
+        'cta_label',
+        'cta_url',
+    ];
+
+    foreach ($column_meta_fields as $field) {
+        register_post_meta('myremote_column', $field, [
+            'type' => 'string',
+            'single' => true,
+            'show_in_rest' => true,
+            'sanitize_callback' => 'sanitize_textarea_field',
+            'auth_callback' => '__return_true',
+        ]);
+    }
 
     $meta_fields = [
         'company_name',
@@ -960,6 +986,13 @@ add_action('acf/init', function () {
                 'rows' => 3,
             ],
             [
+                'key' => 'field_myremote_column_eyecatch_url',
+                'label' => 'アイキャッチ画像URL',
+                'name' => 'eyecatch_url',
+                'type' => 'url',
+                'instructions' => 'WordPressのアイキャッチ画像を使わない場合の画像URLです。',
+            ],
+            [
                 'key' => 'field_myremote_column_media',
                 'label' => '本文内メディア',
                 'name' => 'body_media',
@@ -967,6 +1000,66 @@ add_action('acf/init', function () {
                 'instructions' => 'コラム本文で使う画像を追加します。アイキャッチ画像は右側の「アイキャッチ画像」を使用してください。',
                 'return_format' => 'array',
                 'preview_size' => 'medium',
+            ],
+            [
+                'key' => 'field_myremote_column_body_media_url',
+                'label' => '本文内画像URL',
+                'name' => 'body_media_url',
+                'type' => 'url',
+                'instructions' => '本文途中に1枚だけ固定表示する画像URLです。',
+            ],
+            [
+                'key' => 'field_myremote_column_body_media_caption',
+                'label' => '本文内画像キャプション',
+                'name' => 'body_media_caption',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_myremote_column_section_1_heading',
+                'label' => 'セクション1見出し',
+                'name' => 'section_1_heading',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_myremote_column_section_1_body',
+                'label' => 'セクション1本文',
+                'name' => 'section_1_body',
+                'type' => 'textarea',
+                'rows' => 6,
+            ],
+            [
+                'key' => 'field_myremote_column_section_2_heading',
+                'label' => 'セクション2見出し',
+                'name' => 'section_2_heading',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_myremote_column_section_2_body',
+                'label' => 'セクション2本文',
+                'name' => 'section_2_body',
+                'type' => 'textarea',
+                'rows' => 6,
+            ],
+            [
+                'key' => 'field_myremote_column_section_3_heading',
+                'label' => 'セクション3見出し',
+                'name' => 'section_3_heading',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'field_myremote_column_section_3_body',
+                'label' => 'セクション3本文',
+                'name' => 'section_3_body',
+                'type' => 'textarea',
+                'rows' => 6,
+            ],
+            [
+                'key' => 'field_myremote_column_checklist_items',
+                'label' => 'チェックリスト',
+                'name' => 'checklist_items',
+                'type' => 'textarea',
+                'rows' => 5,
+                'instructions' => '1行1項目で入力してください。',
             ],
             [
                 'key' => 'field_myremote_column_cta_label',
